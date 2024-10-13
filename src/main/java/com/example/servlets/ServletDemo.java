@@ -23,7 +23,7 @@ public class ServletDemo extends HttpServlet {
         System.out.println("End Station: " + endStation);
 
         // Aggiungi la logica per calcolare il percorso o qualsiasi altra logica
-        String result = "Route from " + startStation + " to " + endStation + " in " + city;
+        String result = "Route fromm " + startStation + " to " + endStation + " in " + city;
 
         // Imposta il risultato come attributo per la pagina JSP
         request.setAttribute("result", result);
