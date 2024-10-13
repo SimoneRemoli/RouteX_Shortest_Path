@@ -13,6 +13,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            position: relative;
         }
 
         /* Container per il form e la mappa */
@@ -108,9 +109,54 @@
             color: #333;
             margin-top: 20px;
         }
+
+        /* Stile per i pulsanti registrati, login e home */
+        .button-container-right {
+            position: absolute;
+            top: 20px;
+            right: 40px; /* Spazio dal margine destro */
+            display: flex;
+            gap: 10px; /* Spazio tra i due pulsanti */
+        }
+
+        .button-container-right a, .button-container-left a {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .button-container-right a:hover, .button-container-left a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Contenitore per il pulsante Home */
+        .button-container-left {
+            position: absolute;
+            top: 20px;
+            left: 40px; /* Spazio dal margine sinistro */
+        }
+
     </style>
 </head>
 <body>
+
+    <!-- Contenitore del pulsante Home -->
+    <div class="button-container-left">
+        <a href="index.jsp">Home</a>
+    </div>
+
+    <!-- Contenitore dei pulsanti Login e Registrati -->
+    <div class="button-container-right">
+        <a href="register.jsp">Register</a>
+        <a href="login.jsp">Login</a>
+    </div>
+
     <div class="main-container">
         <div class="form-container">
             <h2>RouteX - Find Your Metro Route</h2>
@@ -125,7 +171,6 @@
                     <option value="Stockholm">Stockholm</option>
                     <option value="Athens">Athens</option>
                     <option value="Budapest">Budapest</option>
-
                     <!-- Altre città -->
                 </select>
 
@@ -157,12 +202,8 @@
             const selectedCity = citySelect.value.toLowerCase();
             // Aggiorna il percorso dell'immagine in base alla città selezionata
             mapImage.src = 'images/metro-' + selectedCity + '.jpg';
-            //alert("La città selezionata è: " + mapImage.src);
-
         }
     </script>
-        <title>RouteX - Metro Finder Result</title>
 
-        <p>${result}</p>
 </body>
 </html>
