@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>RouteX - Il percorso del futuro</title>
+    <title>RouteX - Metro Finder</title>
     <style>
         body {
             background: linear-gradient(to bottom, #e0f7fa, #80deea);
