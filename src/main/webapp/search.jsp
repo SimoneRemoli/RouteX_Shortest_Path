@@ -118,6 +118,14 @@
                 <select name="city" id="citySelect" onchange="updateMap()">
                     <option value="Rome">Rome</option>
                     <option value="Paris">Paris</option>
+                    <option value="Milan">Milan</option>
+                    <option value="Naples">Naples</option>
+                    <option value="London">London</option>
+                    <option value="Berlin">Berlin</option>
+                    <option value="Stockholm">Stockholm</option>
+                    <option value="Athens">Athens</option>
+                    <option value="Budapest">Budapest</option>
+
                     <!-- Altre città -->
                 </select>
 
@@ -155,7 +163,6 @@
     </script>
         <title>RouteX - Metro Finder Result</title>
 
-        <h2>RouteX - Route Result</h2>
         <p>${result}</p>
 </body>
 </html>
