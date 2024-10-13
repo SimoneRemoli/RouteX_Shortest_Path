@@ -20,13 +20,13 @@
         .main-container {
             display: flex;
             background: rgba(255, 255, 255, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            padding: 40px; /* Aumentato il padding */
+            border-radius: 20px; /* Aumentato il border-radius */
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Rafforzato lo shadow */
             animation: slideIn 1s ease-out;
-            max-width: 1000px;
-            width: 90%;
-            gap: 20px;
+            max-width: 1200px; /* Aumentato da 1000px a 1200px */
+            width: 95%; /* Aumentato il width */
+            gap: 40px; /* Aumentato lo spazio tra i contenitori */
         }
 
         /* Container per il form */
@@ -42,8 +42,8 @@
             justify-content: center;
             align-items: center;
             border: 2px solid #007bff;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 20px; /* Aumentato il border-radius */
+            box-shadow: 0 8px 10px rgba(0, 0, 0, 0.2); /* Rafforzato lo shadow */
             background: #f0f8ff;
         }
 
@@ -55,13 +55,13 @@
 
         /* Stile per le dropdown */
         select {
-            width: 80%;
-            padding: 12px;
+            width: 90%; /* Aumentata la larghezza */
+            padding: 16px; /* Aumentato il padding */
             margin: 10px 0;
             border: 1px solid #007bff;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            font-size: 16px;
+            font-size: 18px; /* Aumentato il font-size */
             transition: all 0.3s ease;
         }
 
@@ -70,9 +70,9 @@
             background-color: #007bff;
             color: white;
             border: none;
-            padding: 12px 20px;
-            border-radius: 10px;
-            font-size: 18px;
+            padding: 16px 30px; /* Aumentato il padding */
+            border-radius: 15px;
+            font-size: 20px; /* Aumentato il font-size */
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -105,7 +105,7 @@
 
         /* Stile per il testo del risultato */
         p {
-            font-size: 18px;
+            font-size: 20px; /* Aumentato il font-size */
             color: #333;
             margin-top: 20px;
         }
@@ -171,7 +171,6 @@
                     <option value="Stockholm">Stockholm</option>
                     <option value="Athens">Athens</option>
                     <option value="Budapest">Budapest</option>
-                    <!-- Altre città -->
                 </select>
 
                 <select name="startStation">
