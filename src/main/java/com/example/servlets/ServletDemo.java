@@ -28,6 +28,7 @@ public class ServletDemo extends HttpServlet {
 
         // Imposta il risultato come attributo per la pagina JSP
         request.setAttribute("result", result);
+        //aggiunta riga
 
         // Inoltra la richiesta alla pagina search.jsp per mostrare il risultato
         request.getRequestDispatcher("/search.jsp").forward(request, response);

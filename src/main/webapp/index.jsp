@@ -67,6 +67,8 @@
         <a href="login.jsp">Login</a>
     </div>
 
+
+
     <!-- Contenitore centrale -->
     <div class="welcome-container">
         <img src="images/logo-no-background.png" alt="Logo" width="299" height="120"/>
