@@ -9,6 +9,7 @@ import java.io.IOException;
 //faccio un commento per sincronizzarmi con la repository remota
 //ricommentoo
 
+//new
 @WebServlet("/ServletDemo")
 public class ServletDemo extends HttpServlet {
     @Override
@@ -36,7 +37,7 @@ public class ServletDemo extends HttpServlet {
         request.getRequestDispatcher("/search.jsp").forward(request, response);
 
 
-
+    
 
     }
 }
