@@ -38,6 +38,9 @@ public class ServletDemo extends HttpServlet {
         // Inoltra la richiesta alla pagina search.jsp per mostrare il risultato
         request.getRequestDispatcher("/search.jsp").forward(request, response);
 
+        City roma = new City(city);
+        System.out.println("Val = "+roma.nome);
+
 
     
 
