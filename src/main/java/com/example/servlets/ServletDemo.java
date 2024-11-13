@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 
 //faccio un commento per sincronizzarmi con la repository remota
 //ricommentoo
@@ -38,8 +39,16 @@ public class ServletDemo extends HttpServlet {
         // Inoltra la richiesta alla pagina search.jsp per mostrare il risultato
         request.getRequestDispatcher("/search.jsp").forward(request, response);
 
+
         City roma = new City(city);
+        roma.Dijkstra();
         System.out.println("Val = "+roma.nome);
+
+
+
+
+
+
 
 
     
