@@ -14,65 +14,69 @@
             align-items: center;
             overflow: hidden;
             position: relative;
-            background: linear-gradient(to bottom, #e0f7fa, #80deea);
+            background: #e0f7fa;
         }
 
-        /* Animazioni di sfondo con linee in movimento */
-        .metro-lines {
+        /* Contenitore SVG per la mappa animata */
+        .metro-map {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
             z-index: -1;
+            overflow: hidden;
         }
 
+        /* Linee animate */
         .line {
-            position: absolute;
-            width: 2px;
-            height: 100%;
-            background-color: #007bff;
-            animation: move 6s linear infinite;
+            fill: none;
+            stroke-width: 5;
+            stroke-linecap: round;
+            animation: move 4s infinite linear;
+        }
+
+        .line1 {
+            stroke: #007bff;
+        }
+
+        .line2 {
+            stroke: #ff5722;
+        }
+
+        .line3 {
+            stroke: #4caf50;
+        }
+
+        .line4 {
+            stroke: #9c27b0;
         }
 
         @keyframes move {
             0% {
-                transform: translateX(-100%);
+                stroke-dasharray: 0, 200;
             }
             100% {
-                transform: translateX(100%);
+                stroke-dasharray: 200, 200;
             }
         }
 
-        .line:nth-child(2) {
-            left: 10%;
-            animation-delay: 1s;
-            background-color: #ff5722;
+        /* Cerchi animati (nodi) */
+        .station {
+            fill: white;
+            stroke: black;
+            stroke-width: 3;
+            r: 8;
+            animation: pop 2s infinite alternate;
         }
 
-        .line:nth-child(3) {
-            left: 30%;
-            animation-delay: 2s;
-            background-color: #4caf50;
-        }
-
-        .line:nth-child(4) {
-            left: 50%;
-            animation-delay: 3s;
-            background-color: #ffc107;
-        }
-
-        .line:nth-child(5) {
-            left: 70%;
-            animation-delay: 4s;
-            background-color: #9c27b0;
-        }
-
-        .line:nth-child(6) {
-            left: 90%;
-            animation-delay: 5s;
-            background-color: #03a9f4;
+        @keyframes pop {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.2);
+            }
         }
 
         .welcome-container {
@@ -140,15 +144,31 @@
     </style>
 </head>
 <body>
-    <!-- Animazioni di sfondo -->
-    <div class="metro-lines">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-    </div>
+    <!-- Animazione SVG -->
+    <svg class="metro-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+        <!-- Linee metropolitane -->
+        <path d="M100,100 C200,50 300,150 400,100 S600,150 700,100" class="line line1"/>
+        <path d="M150,200 C250,250 350,150 450,200 S650,250 750,200" class="line line2"/>
+        <path d="M100,300 C200,350 300,250 400,300 S600,350 700,300" class="line line3"/>
+        <path d="M150,400 C250,450 350,350 450,400 S650,450 750,400" class="line line4"/>
+
+        <!-- Stazioni (nodi) -->
+        <circle cx="100" cy="100" class="station"/>
+        <circle cx="400" cy="100" class="station"/>
+        <circle cx="700" cy="100" class="station"/>
+
+        <circle cx="150" cy="200" class="station"/>
+        <circle cx="450" cy="200" class="station"/>
+        <circle cx="750" cy="200" class="station"/>
+
+        <circle cx="100" cy="300" class="station"/>
+        <circle cx="400" cy="300" class="station"/>
+        <circle cx="700" cy="300" class="station"/>
+
+        <circle cx="150" cy="400" class="station"/>
+        <circle cx="450" cy="400" class="station"/>
+        <circle cx="750" cy="400" class="station"/>
+    </svg>
 
     <!-- Contenitore dei pulsanti Login e Registrati -->
     <div class="button-container">
