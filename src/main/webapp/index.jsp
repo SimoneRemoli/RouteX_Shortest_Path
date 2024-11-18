@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <title>RouteX - Metro Finder</title>
     <style>
         body {
@@ -137,6 +138,29 @@
         .button-container a:hover {
             background-color: #0056b3;
         }
+
+        /* Sezione per loghi della metropolitana */
+        .metro-logos {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .metro-logos img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .metro-logos img:hover {
+            transform: scale(1.2);
+        }
     </style>
 </head>
 <body>
@@ -169,5 +193,14 @@
             </div>
         </div>
     </div>
+
+    <!-- Sezione loghi della metropolitana -->
+    <div class="metro-logos">
+        <i class="fas fa-subway" style="font-size: 50px; color: white;"></i>
+        <i class="fas fa-train" style="font-size: 50px; color: white;"></i>
+        <i class="fas fa-bus" style="font-size: 50px; color: white;"></i>
+        <i class="fas fa-map-marker-alt" style="font-size: 50px; color: white;"></i>
+    </div>
+
 </body>
 </html>
