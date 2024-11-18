@@ -10,96 +10,91 @@
             font-family: 'Arial Rounded MT Bold', sans-serif;
             height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
+            background: url('images/light.jpg') no-repeat center center/cover;
             overflow: hidden;
             position: relative;
-            background: #e0f7fa;
         }
 
-        /* Contenitore SVG per la mappa animata */
-        .metro-map {
+        /* Sfocatura per il background */
+        .background-blur {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            backdrop-filter: blur(6px); /* Sfocatura leggera */
             z-index: -1;
-            overflow: hidden;
         }
 
-        /* Linee animate */
-        .line {
-            fill: none;
-            stroke-width: 5;
-            stroke-linecap: round;
-            animation: move 4s infinite linear;
+        /* Contenitore principale */
+        .main-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            color: white;
         }
 
-        .line1 {
-            stroke: #007bff;
+        /* Box a sinistra per logo e motto */
+        .left-box {
+            flex: 1;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
         }
 
-        .line2 {
-            stroke: #ff5722;
+        .left-box img {
+            width: 150px;
+            margin-bottom: 20px;
         }
 
-        .line3 {
-            stroke: #4caf50;
-        }
-
-        .line4 {
-            stroke: #9c27b0;
-        }
-
-        @keyframes move {
-            0% {
-                stroke-dasharray: 0, 200;
-            }
-            100% {
-                stroke-dasharray: 200, 200;
-            }
-        }
-
-        /* Cerchi animati (nodi) */
-        .station {
-            fill: white;
-            stroke: black;
-            stroke-width: 3;
-            r: 8;
-            animation: pop 2s infinite alternate;
-        }
-
-        @keyframes pop {
-            0% {
-                transform: scale(1);
-            }
-            100% {
-                transform: scale(1.2);
-            }
-        }
-
-        .welcome-container {
+        .left-box h1 {
+            font-size: 24px;
             text-align: center;
-            background: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+        }
+
+        .left-box p {
+            font-size: 18px;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* Contenitore centrale per pulsanti e contenuto */
+        .right-content {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .right-content .welcome-container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .welcome-container img {
+        .right-content .welcome-container img {
             animation: fadeIn 2s ease-in-out;
+            width: 200px;
+            margin-bottom: 20px;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+        .right-content .welcome-container h1 {
+            color: white;
+            font-size: 26px;
+            margin-bottom: 20px;
         }
 
         .welcome-button {
@@ -117,6 +112,7 @@
             background-color: #0056b3;
         }
 
+        /* Pulsanti di Login e Registrati */
         .button-container {
             position: absolute;
             top: 20px;
@@ -144,45 +140,34 @@
     </style>
 </head>
 <body>
-    <!-- Animazione SVG -->
-    <svg class="metro-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
-        <!-- Linee metropolitane -->
-        <path d="M100,100 C200,50 300,150 400,100 S600,150 700,100" class="line line1"/>
-        <path d="M150,200 C250,250 350,150 450,200 S650,250 750,200" class="line line2"/>
-        <path d="M100,300 C200,350 300,250 400,300 S600,350 700,300" class="line line3"/>
-        <path d="M150,400 C250,450 350,350 450,400 S650,450 750,400" class="line line4"/>
+    <!-- Sfocatura del background -->
+    <div class="background-blur"></div>
 
-        <!-- Stazioni (nodi) -->
-        <circle cx="100" cy="100" class="station"/>
-        <circle cx="400" cy="100" class="station"/>
-        <circle cx="700" cy="100" class="station"/>
+    <!-- Contenitore principale -->
+    <div class="main-container">
+        <!-- Box a sinistra -->
+        <div class="left-box">
+            <img src="images/logo-no-background.png" alt="Logo">
+            <h1>RouteX</h1>
+            <p>Navigating the Future,<br>One Stop at a Time</p>
+        </div>
 
-        <circle cx="150" cy="200" class="station"/>
-        <circle cx="450" cy="200" class="station"/>
-        <circle cx="750" cy="200" class="station"/>
+        <!-- Contenuto centrale -->
+        <div class="right-content">
+            <!-- Pulsanti Login e Registrati -->
+            <div class="button-container">
+                <a href="register.jsp">Register</a>
+                <a href="login.jsp">Login</a>
+            </div>
 
-        <circle cx="100" cy="300" class="station"/>
-        <circle cx="400" cy="300" class="station"/>
-        <circle cx="700" cy="300" class="station"/>
-
-        <circle cx="150" cy="400" class="station"/>
-        <circle cx="450" cy="400" class="station"/>
-        <circle cx="750" cy="400" class="station"/>
-    </svg>
-
-    <!-- Contenitore dei pulsanti Login e Registrati -->
-    <div class="button-container">
-        <a href="register.jsp">Register</a>
-        <a href="login.jsp">Login</a>
-    </div>
-
-    <!-- Contenitore centrale -->
-    <div class="welcome-container">
-        <img src="images/logo-no-background.png" alt="Logo" width="299" height="120"/>
-        <h1> RouteX - Navigating the Future, One Stop at a Time </h1>
-        <form action="search.jsp" method="post">
-            <button class="welcome-button" type="submit">Start</button>
-        </form>
+            <div class="welcome-container">
+                <img src="images/logo-no-background.png" alt="Logo">
+                <h1>Welcome to RouteX!</h1>
+                <form action="search.jsp" method="post">
+                    <button class="welcome-button" type="submit">Start Exploring</button>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>
