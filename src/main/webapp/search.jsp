@@ -184,7 +184,6 @@
                 <button type="submit">Find Route</button>
             </form>
 
-            <p>${result}</p>
         </div>
 
         <div class="map-container">

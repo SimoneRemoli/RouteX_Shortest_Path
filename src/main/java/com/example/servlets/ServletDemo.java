@@ -33,7 +33,7 @@ public class ServletDemo extends HttpServlet {
         System.out.println(result);
 
         // Imposta il risultato come attributo per la pagina JSP
-        request.setAttribute("result", result);
+       // request.setAttribute("result", result);
         //aggiunta riga
 
         // Inoltra la richiesta alla pagina search.jsp per mostrare il risultato
