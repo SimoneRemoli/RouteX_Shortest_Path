@@ -40,13 +40,17 @@ public class ServletDemo extends HttpServlet {
         request.getRequestDispatcher("/search.jsp").forward(request, response);
 
 
-        City roma = new City(city);
+        /*City roma = new City(city);
         roma.Dijkstra();
         System.out.println("Val = "+roma.nome);
 
 
+*/
 
 
+
+        City metropoli = new Rome();
+        metropoli.Dijkstra();
 
 
 
