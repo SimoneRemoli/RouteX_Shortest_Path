@@ -49,8 +49,10 @@ public class ServletDemo extends HttpServlet {
 
 
 
-        City metropoli = new Rome();
-        metropoli.Dijkstra();
+        City metropoli1 = new Rome();
+        City metropoli2 = new Milan();
+       // metropoli1.Dijkstra();
+        metropoli2.Dijkstra();
 
 
 
