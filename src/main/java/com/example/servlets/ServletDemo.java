@@ -5,7 +5,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Arrays;
+
 
 //faccio un commento per sincronizzarmi con la repository remota
 //ricommentoo
@@ -27,8 +32,11 @@ public class ServletDemo extends HttpServlet {
         System.out.println("City: " + city);
         System.out.println("Start Station: " + startStation);
         System.out.println("End Station: " + endStation);
-        
-        
+
+
+
+
+
         City metropoli = null;
         
         if(city.equals("Rome")) // se scelgo roma entra qui
@@ -39,7 +47,15 @@ public class ServletDemo extends HttpServlet {
         {
             metropoli = new Milan();
         }
+        assert metropoli != null;
         metropoli.Dijkstra();
+
+
+        try {
+            StationDAO DAO = new StationDAO();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         
         
         
