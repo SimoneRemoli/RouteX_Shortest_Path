@@ -27,6 +27,22 @@ public class ServletDemo extends HttpServlet {
         System.out.println("City: " + city);
         System.out.println("Start Station: " + startStation);
         System.out.println("End Station: " + endStation);
+        
+        
+        City metropoli = null;
+        
+        if(city.equals("Rome")) // se scelgo roma entra qui
+        {
+            metropoli = new Rome();
+        }
+        if(city.equals("Milan")) //se scelgo milano entra qui
+        {
+            metropoli = new Milan();
+        }
+        metropoli.Dijkstra();
+        
+        
+        
 
         // Aggiungi la logica per calcolare il percorso o qualsiasi altra logica
         String result = "Route frommm " + startStation + " to " + endStation + " in " + city;
@@ -49,11 +65,11 @@ public class ServletDemo extends HttpServlet {
 
 
 
-        City metropoli1 = new Rome();
+       /* City metropoli1 = new Rome();
         City metropoli2 = new Milan();
-       // metropoli1.Dijkstra();
+        //metropoli1.Dijkstra();
         metropoli2.Dijkstra();
-
+*/
 
 
 

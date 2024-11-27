@@ -1,5 +1,8 @@
 package com.example.servlets;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Stack;
 
@@ -10,9 +13,39 @@ public  abstract class City
     {
         this.nome = a;
     }*/
-    protected int[][] matriceAdiacenza;
+    protected int[][] matriceAdiacenza; //le classi figlie possono specializzare la loro matrice di adiacenza
+    protected void caricaMatriceDaFile(String filePath) {
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath)))
+        {
+            String line;
+            int row = 0;
+            while ((line = br.readLine()) != null)
+            {
+                String[] values = line.split(",");
+                //System.out.println("Linea letta: " + line + "values.lenght = " + values.length);
+                //System.out.println("Valore values = " + Arrays.toString(values));
+
+                for (int col = 0; col < (values.length); col++) {
+                    matriceAdiacenza[row][col] = Integer.parseInt(values[col].trim());
+                    //System.out.println("matrice["+row+"]"+"["+col+"]"+"="+matriceAdiacenza[row][col]);
+
+                }
+                row++;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        /*for (int i = 0; i < matriceAdiacenza.length; i++) {
+            for (int j = 0; j < matriceAdiacenza[i].length; j++) {
+                System.out.print(matriceAdiacenza[i][j] + " ");
+            }
+            System.out.println();
+        }*/
+    }
     public void views_arrays(int[]a,int[]b, int[][]matrice)
     {
+        //System.out.print("Matrice.lenght =  "+ matrice.length);
         System.out.print("Know = ");
         for(int i=0; i< matrice.length; i++)
         {
@@ -80,7 +113,7 @@ public  abstract class City
     public void Dijkstra()
     {
         // Stampa della matrice di adiacenza
-        for (int i = 0; i < matriceAdiacenza.length; i++)
+       /* for (int i = 0; i < matriceAdiacenza.length; i++)
         {
             System.out.println();
             for (int j = 0; j < matriceAdiacenza[i].length; j++)
@@ -89,7 +122,7 @@ public  abstract class City
             }
             System.out.println();
 
-        }
+        }*/
         int nodo_partenza = 0, nodo_arrivo = 3;
         int [] know = new int[matriceAdiacenza.length];
         int [] cost = new int[matriceAdiacenza.length];
@@ -115,7 +148,7 @@ public  abstract class City
                     adj_temp = adiacenti_vector[i];
                     if(know[adj_temp]==-1) { // se il nodo adiacente non è conosciuto
 
-                        System.out.println("nodo_partenza = "+nodo_partenza+" e adj_temp = "+ adj_temp);
+                       // System.out.println("nodo_partenza = "+nodo_partenza+" e adj_temp = "+ adj_temp);
 
                         if(cost[adj_temp] > cost[nodo_partenza] + matriceAdiacenza[nodo_partenza][adj_temp])
                         {
