@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -20,6 +21,9 @@ import java.util.Arrays;
 //pooo
 @WebServlet("/ServletDemo")
 public class ServletDemo extends HttpServlet {
+    ArrayList<String> Percorsi_Con_Nomi = new ArrayList<String>();
+
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Recupera il valore della città selezionata dal form
@@ -62,9 +66,13 @@ public class ServletDemo extends HttpServlet {
         assert metropoli != null;
         try {
             metropoli.Dijkstra(code_start_station,code_finish_station,city);
+            Percorsi_Con_Nomi = metropoli.getPercorsi_Nomi(); //NELLA SERVLET HO I PERCORSI
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        System.out.println("Nella servlet");
+        for(int i=0;i<Percorsi_Con_Nomi.size();i++) System.out.print(" " + Percorsi_Con_Nomi.get(i)+" ---> ");
+
 
 
         // Aggiungi la logica per calcolare il percorso o qualsiasi altra logica

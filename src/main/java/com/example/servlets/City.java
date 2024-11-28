@@ -165,7 +165,7 @@ public  abstract class City
         for (int i = 0; i < matriceAdiacenza.length; i++)
         {
             if(i==nodo_arrivo) { //se levassi questa condizione mi stamperebbe tutti i percorsi dalla stazione di partenza to *
-                System.out.print("Nodo " + i + ": Num fermate da attraversare = " + cost[i]+1 + ", Percorso = ");
+                System.out.print("Nodo " + i + ": Num fermate da attraversare = " + cost[i] + ", Percorso = ");
                 this.stampaPercorso(i, precedente);
                 System.out.println();
             }
@@ -181,7 +181,13 @@ public  abstract class City
 
 
 
+
     }
+    public  ArrayList<String> getPercorsi_Nomi()
+    {
+        return Percorsi_Con_Nomi;
+    }
+
 }
 
 
