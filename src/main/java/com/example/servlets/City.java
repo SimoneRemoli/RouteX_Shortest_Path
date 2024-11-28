@@ -3,7 +3,9 @@ package com.example.servlets;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 public  abstract class City
@@ -13,6 +15,8 @@ public  abstract class City
     {
         this.nome = a;
     }*/
+    ArrayList<Integer> percorsi_codifica = new ArrayList<Integer>();
+    ArrayList<String> Percorsi_Con_Nomi = new ArrayList<String>();
     protected int[][] matriceAdiacenza; //le classi figlie possono specializzare la loro matrice di adiacenza
     protected void caricaMatriceDaFile(String filePath) {
 
@@ -102,28 +106,20 @@ public  abstract class City
     }
     public void stampaPercorso(int nodo, int[] precedente) {
         Stack<Integer> percorso = new Stack<>();
+        int app;
         while (nodo != -1) {
             percorso.push(nodo);
             nodo = precedente[nodo];
         }
         while (!percorso.isEmpty()) {
-            System.out.print(percorso.pop() + " ");
+            app = percorso.pop();
+            System.out.print(app + " ");
+            percorsi_codifica.add(app);
+
         }
     }
-    public void Dijkstra()
-    {
-        // Stampa della matrice di adiacenza
-       /* for (int i = 0; i < matriceAdiacenza.length; i++)
-        {
-            System.out.println();
-            for (int j = 0; j < matriceAdiacenza[i].length; j++)
-            {
-                System.out.print(matriceAdiacenza[i][j] + "        ");
-            }
-            System.out.println();
-
-        }*/
-        int nodo_partenza = 0, nodo_arrivo = 3;
+    public void Dijkstra(int partenza, int arrivo, String city) throws Exception {
+        int nodo_partenza = partenza, nodo_arrivo = arrivo;
         int [] know = new int[matriceAdiacenza.length];
         int [] cost = new int[matriceAdiacenza.length];
         Arrays.fill(cost, 1000);
@@ -168,10 +164,23 @@ public  abstract class City
         System.out.println("Path.");
         for (int i = 0; i < matriceAdiacenza.length; i++)
         {
-            System.out.print("Nodo " + i + ": Costo = " + cost[i] + ", Percorso = ");
-            this.stampaPercorso(i, precedente);
-            System.out.println();
+            if(i==nodo_arrivo) { //se levassi questa condizione mi stamperebbe tutti i percorsi dalla stazione di partenza to *
+                System.out.print("Nodo " + i + ": Num fermate da attraversare = " + cost[i]+1 + ", Percorso = ");
+                this.stampaPercorso(i, precedente);
+                System.out.println();
+            }
         }
+
+       /* for (int i = 0; i < percorsi.size(); i++) {
+            System.out.println("Fermata da attraversare " + i + ": " + percorsi.get(i));
+        }*/
+
+        PercorsiDAO percorso = new PercorsiDAO(percorsi_codifica,city); //dalle codifiche ai nomi (MAPPING)
+        Percorsi_Con_Nomi = percorso.getPercorsi_Con_Fermate(); //Sputa i veri percorsi
+        for(int i=0;i<Percorsi_Con_Nomi.size();i++) System.out.print(" " + Percorsi_Con_Nomi.get(i)+" ---> ");
+
+
+
     }
 }
 

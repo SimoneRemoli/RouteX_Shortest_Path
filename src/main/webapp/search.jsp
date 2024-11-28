@@ -294,7 +294,7 @@
                      "Châtillon–Montrouge", "Pyramides", "Cour Saint-Émilion", "Bibliothèque François Mitterrand",
                      "Olympiades"],
 
-            "Milan": ["Sesto 1º Maggio FS", "Sesto Rondò", "Sesto Marelli", "Villa San Giovanni", "Precotto", "Gorla", "Turro", "Rovereto",
+            "Milan": ["Sesto 1º Maggio FS", "Sesto Rondo", "Sesto Marelli", "Villa San Giovanni", "Precotto", "Gorla", "Turro", "Rovereto",
                       "Pasteur", "Loreto", "Lima", "Porta Venezia", "Palestro", "San Babila", "Duomo", "Cordusio", "Cairoli", "Cadorna FN",
                       "Conciliazione", "Pagano", "De Angeli", "Gambara", "Bande Nere", "Primaticcio", "Inganni", "Bisceglie", "Wagner",
                       "Buonarroti", "Amendola", "Lotto", "QT8", "Lampugnano", "Uruguay", "Bonola", "San Leonardo", "Molino Dorino", "Rho Fiera",

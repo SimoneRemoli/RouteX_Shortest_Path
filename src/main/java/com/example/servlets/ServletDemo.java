@@ -27,6 +27,7 @@ public class ServletDemo extends HttpServlet {
         String city = request.getParameter("city");
         String startStation = request.getParameter("startStation");
         String endStation = request.getParameter("endStation");
+        int code_start_station = 0, code_finish_station = 0;
         //30
         // Esegui la logica con i dati ricevuti
         System.out.println("City: " + city);
@@ -34,6 +35,17 @@ public class ServletDemo extends HttpServlet {
         System.out.println("End Station: " + endStation);
 
 
+        try {
+            StationDAO DAO = new StationDAO(startStation,endStation,city);
+            code_start_station = DAO.getStazione_di_Partenza();
+            code_finish_station = DAO.getStazione_di_arrivo();
+            System.out.println("Id della stazione di partenza = " + DAO.getStazione_di_Partenza());
+            System.out.println("Id della stazione di arrivo = " + DAO.getStazione_di_arrivo());
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
 
 
@@ -48,20 +60,15 @@ public class ServletDemo extends HttpServlet {
             metropoli = new Milan();
         }
         assert metropoli != null;
-        metropoli.Dijkstra();
-
-
         try {
-            StationDAO DAO = new StationDAO();
+            metropoli.Dijkstra(code_start_station,code_finish_station,city);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        
-        
-        
+
 
         // Aggiungi la logica per calcolare il percorso o qualsiasi altra logica
-        String result = "Route frommm " + startStation + " to " + endStation + " in " + city;
+        String result = "Route from " + startStation + " to " + endStation + " in " + city;
         System.out.println(result);
 
         // Imposta il risultato come attributo per la pagina JSP

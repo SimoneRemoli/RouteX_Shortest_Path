@@ -1,38 +1,55 @@
 package com.example.servlets;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 
 public class StationDAO {
 
-    public StationDAO() throws Exception {
-        connection();
+    int Stazione_di_Partenza, Stazione_di_Arrivo;
+
+    public StationDAO(String startstation, String endstation, String citta) throws Exception {
+        connection(startstation,endstation,citta);
 
     }
-    private void connection() throws Exception {
+    public int getStazione_di_Partenza()
+    {
+        return Stazione_di_Partenza;
+    }
+    public int getStazione_di_arrivo()
+    {
+        return Stazione_di_Arrivo;
+    }
+    private void connection(String startstation, String endstation, String citta) throws Exception {
         String url = "jdbc:mysql://sql8.freesqldatabase.com:3306/sql8747953"; // Host e nome del database
-        String username = "**"; // Username del database
-        String password = "**"; // Password del database
+        String username = "sql8747953"; // Username del database
+        String password = "egM4kA6PMB"; // Password del database
 
         try {
+            System.out.println("La città che entra è = " + citta);
             Class.forName("com.mysql.cj.jdbc.Driver"); // Caricamento del driver
             Connection conn = DriverManager.getConnection(url, username, password);
             System.out.println("Connessione al database riuscita!");
-            String query = "select * from Roma;";
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
+            /*Eseguo una query parametrizzata*/
+            String query = "select id from " + citta + " where nome=?";
+            //System.out.println("Query =  " + query);
+            PreparedStatement pstmt = conn.prepareStatement(query);
 
-            // Lettura dei dati
-            while (rs.next())
-            {
-                System.out.println("Stazione: " + rs.getString("nome"));
+            // Primo parametro: startstation
+            pstmt.setString(1, startstation);
+            ResultSet rs1 = pstmt.executeQuery();
+            if (rs1.next()) {
+                this.Stazione_di_Partenza = rs1.getInt("id");
             }
+            rs1.close();
 
-            rs.close();
-            stmt.close();
+            // Secondo parametro: endstation
+            pstmt.setString(1, endstation);
+            ResultSet rs2 = pstmt.executeQuery();
+            if (rs2.next()) {
+                this.Stazione_di_Arrivo = rs2.getInt("id");
+            }
+            rs2.close();
 
+            pstmt.close();
             conn.close();
         } catch (Exception e) {
             e.printStackTrace();
