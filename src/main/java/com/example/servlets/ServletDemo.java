@@ -1,4 +1,5 @@
 package com.example.servlets;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -72,7 +73,10 @@ public class ServletDemo extends HttpServlet {
         }
         System.out.println("Nella servlet");
         for(int i=0;i<Percorsi_Con_Nomi.size();i++) System.out.print(" " + Percorsi_Con_Nomi.get(i)+" ---> ");
-
+        request.setAttribute("percorsi", Percorsi_Con_Nomi);
+        //inoltro la richiesta al jsp
+        RequestDispatcher dispatcher = request.getRequestDispatcher("PathNOREG.jsp");
+        dispatcher.forward(request, response);
 
 
         // Aggiungi la logica per calcolare il percorso o qualsiasi altra logica
@@ -84,7 +88,7 @@ public class ServletDemo extends HttpServlet {
         //aggiunta riga
 
         // Inoltra la richiesta alla pagina search.jsp per mostrare il risultato
-        request.getRequestDispatcher("/search.jsp").forward(request, response);
+        //request.getRequestDispatcher("/search.jsp").forward(request, response);
 
 
         /*City roma = new City(city);

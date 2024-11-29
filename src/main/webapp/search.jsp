@@ -209,7 +209,7 @@
                 "Garbatella", "Piramide", "Circo Massimo", "Colosseo","Cavour", "Termini",
                 "Castro Pretorio", "Policlinico", "Bologna", "Tiburtina FS", "Quintiliani",
                 "Monti Tiburtini", "Pietralata", "Santa Maria del Soccorso", "Ponte Mammolo",
-                "Rebibbia", "Sant'Agnese/Annibaliano", "Libia", "Conca d'Oro", "Jonio"
+                "Rebibbia", "Annibaliano", "Libia", "Conca d'Oro", "Jonio"
             ],
 
             "Paris": ["La Défense", "Esplanade de La Défense", "Pont de Neuilly", "Les Sablons",
