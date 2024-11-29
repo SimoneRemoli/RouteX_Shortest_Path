@@ -138,17 +138,20 @@
 <body>
     <!-- Barra laterale -->
     <div class="sidebar">
-        <h1>Percorso Stazioni</h1>
+        <h1>Best route</h1>
         <ul class="route-list">
             <%
                 // Ottieni i dati dall'attributo della richiesta
                 List<String> dati = (List<String>) request.getAttribute("percorsi");
+
+
 
                 if (dati != null && !dati.isEmpty()) {
                     int count = 1;
                     for (String elemento : dati) {
             %>
                         <li>
+
                             <span><%= count++ %></span>
                             <%= elemento %>
                         </li>
@@ -170,9 +173,15 @@
         <button class="home-button" onclick="location.href='index.jsp'">Home</button>
         <button class="back-button" onclick="location.href='search.jsp'">Back</button>
 
-        <h2>Benvenuto su RouteX!</h2>
+        <h2>Welcome to RouteX!</h2>
         <p>
-            Seleziona un percorso dalla lista sulla sinistra per visualizzarne i dettagli.
+            Information about the route you have just chosen will be provided below.
+            <%
+            int numero_cambi = (int) request.getAttribute("numero_cambi");
+            //out.println("<li>" + numero_cambi + "</li>");
+            out.print("<h3> Number of metro line changes : " + numero_cambi + "</h3>");
+            %>
+
         </p>
     </div>
 </body>

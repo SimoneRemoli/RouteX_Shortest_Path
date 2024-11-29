@@ -7,6 +7,7 @@ public class PercorsiDAO {
 
     private ArrayList<String> Percorsi_Con_Fermate = new ArrayList<String>();
     private ArrayList<Integer> Percorsi_Codifica = new ArrayList<Integer>();
+    private int cambi_linee_metropolitane = -1;
 
 
     public PercorsiDAO(ArrayList<Integer> a, String city) throws Exception {
@@ -17,6 +18,10 @@ public class PercorsiDAO {
     {
         return Percorsi_Con_Fermate;
     }
+    public int getCambi_linee_metropolitane()
+    {
+        return this.cambi_linee_metropolitane;
+    }
     private void connection(ArrayList<Integer> Percorsi_Codifica,String city) throws Exception
     {
         String url = "jdbc:mysql://sql8.freesqldatabase.com:3306/sql8747953"; // Host e nome del database
@@ -25,6 +30,7 @@ public class PercorsiDAO {
         Statement stmt = null;
         ResultSet rs = null;
         String fermate = null;
+        String linea = null, linea_temp = null;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Caricamento del driver
@@ -34,14 +40,18 @@ public class PercorsiDAO {
             for (int i = 0; i < Percorsi_Codifica.size(); i++)
             {
                // System.out.println("Fermata da attraversare nel dao " + i + ": " + Percorsi_Codifica.get(i));
-                String query = "select nome from "+city+" where id="+Percorsi_Codifica.get(i).toString();
+                String query = "select nome,linea from "+city+" where id="+Percorsi_Codifica.get(i).toString();
                 //System.out.println("La query = "+query);
                 stmt = conn.createStatement();
                 rs = stmt.executeQuery(query);
                 while(rs.next())
                 {
                     fermate = rs.getString("nome");
-                   // System.out.println("Nome da attraversare nel dao: " + fermate);
+                    linea = rs.getString("linea");
+
+                    if(!linea.equals(linea_temp)) cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
+
+                    linea_temp = linea;
                     this.Percorsi_Con_Fermate.add(fermate);
                 }
             }
@@ -66,6 +76,8 @@ public class PercorsiDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        this.cambi_linee_metropolitane = this.cambi_linee_metropolitane - (this.cambi_linee_metropolitane/2);
+        System.out.println("CAMBI LINEE METROPOLITANE in PercorsiDAO.Java = " + cambi_linee_metropolitane);
     }
 
 }

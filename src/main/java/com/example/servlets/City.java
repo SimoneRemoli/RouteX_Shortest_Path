@@ -17,6 +17,7 @@ public  abstract class City
     }*/
     ArrayList<Integer> percorsi_codifica = new ArrayList<Integer>();
     ArrayList<String> Percorsi_Con_Nomi = new ArrayList<String>();
+    private int numero_cambi;
     protected int[][] matriceAdiacenza; //le classi figlie possono specializzare la loro matrice di adiacenza
     protected void caricaMatriceDaFile(String filePath) {
 
@@ -178,14 +179,22 @@ public  abstract class City
         PercorsiDAO percorso = new PercorsiDAO(percorsi_codifica,city); //dalle codifiche ai nomi (MAPPING)
         Percorsi_Con_Nomi = percorso.getPercorsi_Con_Fermate(); //Sputa i veri percorsi
         for(int i=0;i<Percorsi_Con_Nomi.size();i++) System.out.print(" " + Percorsi_Con_Nomi.get(i)+" ---> ");
-
+        numero_cambi = percorso.getCambi_linee_metropolitane();
 
 
 
     }
+    public int getNumero_cambi()
+    {
+        return numero_cambi;
+    }
     public  ArrayList<String> getPercorsi_Nomi()
     {
         return Percorsi_Con_Nomi;
+    }
+    public ArrayList<Integer> getPercorsi_codifica()
+    {
+        return percorsi_codifica;
     }
 
 }

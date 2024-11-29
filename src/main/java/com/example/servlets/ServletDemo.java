@@ -23,6 +23,8 @@ import java.util.Arrays;
 @WebServlet("/ServletDemo")
 public class ServletDemo extends HttpServlet {
     ArrayList<String> Percorsi_Con_Nomi = new ArrayList<String>();
+    ArrayList<Integer> Percorsi_Codifiche = new ArrayList<Integer>();
+    int numero_cambi = 0;
 
 
     @Override
@@ -68,12 +70,18 @@ public class ServletDemo extends HttpServlet {
         try {
             metropoli.Dijkstra(code_start_station,code_finish_station,city);
             Percorsi_Con_Nomi = metropoli.getPercorsi_Nomi(); //NELLA SERVLET HO I PERCORSI
+            Percorsi_Codifiche = metropoli.getPercorsi_codifica();
+            numero_cambi = metropoli.getNumero_cambi();
+            System.out.println("-----------Numero cambi =  "+ numero_cambi);
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         System.out.println("Nella servlet");
         for(int i=0;i<Percorsi_Con_Nomi.size();i++) System.out.print(" " + Percorsi_Con_Nomi.get(i)+" ---> ");
+        for(int i=0;i<Percorsi_Codifiche.size();i++) System.out.println(" " + Percorsi_Codifiche.get(i)+ " ----> ");
         request.setAttribute("percorsi", Percorsi_Con_Nomi);
+        request.setAttribute("numero_cambi", numero_cambi);
         //inoltro la richiesta al jsp
         RequestDispatcher dispatcher = request.getRequestDispatcher("PathNOREG.jsp");
         dispatcher.forward(request, response);
