@@ -8,11 +8,17 @@ public class PercorsiDAO {
     private ArrayList<String> Percorsi_Con_Fermate = new ArrayList<String>();
     private ArrayList<Integer> Percorsi_Codifica = new ArrayList<Integer>();
     private int cambi_linee_metropolitane = -1;
+    ArrayList<String> linee = new ArrayList<String>();
+
 
 
     public PercorsiDAO(ArrayList<Integer> a, String city) throws Exception {
         this.Percorsi_Codifica = a;
         connection(Percorsi_Codifica,city);
+    }
+    public ArrayList<String> getLinee()
+    {
+        return linee;
     }
     public  ArrayList<String> getPercorsi_Con_Fermate()
     {
@@ -30,7 +36,8 @@ public class PercorsiDAO {
         Statement stmt = null;
         ResultSet rs = null;
         String fermate = null;
-        String linea = null, linea_temp = null;
+        String linea = null, linea_temp = "", temporanea="";
+        boolean check = false;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Caricamento del driver
@@ -48,12 +55,30 @@ public class PercorsiDAO {
                 {
                     fermate = rs.getString("nome");
                     linea = rs.getString("linea");
+                    if(temporanea.equals(linea))
+                    {
+                        cambi_linee_metropolitane = cambi_linee_metropolitane - 2;
+                        //non ci entra
+                        // System.out.println("Temp = " + temporanea+ "Linea_temp = "+linea_temp+" Linea =  "+linea);
+                    }
 
-                    if(!linea.equals(linea_temp)) cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
+
+
+                    if(!linea.equals(linea_temp))
+                    {
+
+                            temporanea = linea_temp;
+                            cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
+
+                    }
+
 
                     linea_temp = linea;
+
                     this.Percorsi_Con_Fermate.add(fermate);
+                    this.linee.add(linea);
                 }
+                    System.out.println("Numero cambi = "+ cambi_linee_metropolitane);
             }
             rs.close();
             stmt.close();

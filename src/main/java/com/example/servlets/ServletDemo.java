@@ -5,6 +5,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sound.sampled.Line;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,6 +26,7 @@ public class ServletDemo extends HttpServlet {
     ArrayList<String> Percorsi_Con_Nomi = new ArrayList<String>();
     ArrayList<Integer> Percorsi_Codifiche = new ArrayList<Integer>();
     int numero_cambi = 0;
+    ArrayList<String> Linee_Metropolitane = new ArrayList<String>();
 
 
     @Override
@@ -72,7 +74,11 @@ public class ServletDemo extends HttpServlet {
             Percorsi_Con_Nomi = metropoli.getPercorsi_Nomi(); //NELLA SERVLET HO I PERCORSI
             Percorsi_Codifiche = metropoli.getPercorsi_codifica();
             numero_cambi = metropoli.getNumero_cambi();
+            Linee_Metropolitane = metropoli.getLinee();
+            System.out.println(" ");
             System.out.println("-----------Numero cambi =  "+ numero_cambi);
+            for (String s : Linee_Metropolitane) System.out.println("Sequenza di linee metropolitane =  " + s);
+
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -82,6 +88,7 @@ public class ServletDemo extends HttpServlet {
         for(int i=0;i<Percorsi_Codifiche.size();i++) System.out.println(" " + Percorsi_Codifiche.get(i)+ " ----> ");
         request.setAttribute("percorsi", Percorsi_Con_Nomi);
         request.setAttribute("numero_cambi", numero_cambi);
+        request.setAttribute("linee", Linee_Metropolitane);
         //inoltro la richiesta al jsp
         RequestDispatcher dispatcher = request.getRequestDispatcher("PathNOREG.jsp");
         dispatcher.forward(request, response);

@@ -143,17 +143,21 @@
             <%
                 // Ottieni i dati dall'attributo della richiesta
                 List<String> dati = (List<String>) request.getAttribute("percorsi");
+                List<String> linee = (List<String>) request.getAttribute("linee");
 
 
 
-                if (dati != null && !dati.isEmpty()) {
-                    int count = 1;
-                    for (String elemento : dati) {
+                if (dati != null && !dati.isEmpty())
+                {
+                    for(int i=0;i<dati.size();i++)
+                    {
+                        String elemento = dati.get(i);
+                        String linea = linee.get(i);
             %>
                         <li>
-
-                            <span><%= count++ %></span>
+                            <span><%=(i+1)%></span>
                             <%= elemento %>
+                            <% out.print("   <h1 style='padding-left: 10px;'>      ("+linea+")       </h1>"); %>
                         </li>
             <%
                     }
