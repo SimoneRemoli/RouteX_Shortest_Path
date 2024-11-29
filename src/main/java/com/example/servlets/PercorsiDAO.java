@@ -79,6 +79,13 @@ public class PercorsiDAO {
                     this.linee.add(linea);
                 }
                     System.out.println("Numero cambi = "+ cambi_linee_metropolitane);
+                if(i==Percorsi_Codifica.size()-1) //se siamo all'ultima fermata
+                {
+                    if(linea.equals(linea_temp))
+                    {
+                        cambi_linee_metropolitane = cambi_linee_metropolitane - 1;
+                    }
+                }
             }
             rs.close();
             stmt.close();
