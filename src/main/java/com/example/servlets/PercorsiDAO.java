@@ -30,9 +30,9 @@ public class PercorsiDAO {
     }
     private void connection(ArrayList<Integer> Percorsi_Codifica,String city) throws Exception
     {
-        String url = "jdbc:mysql://sql8.freesqldatabase.com:3306/sql8747953"; // Host e nome del database
-        String username = "sql8747953"; // Username del database
-        String password = "egM4kA6PMB"; // Password del database
+        String url = "jdbc:mysql://localhost:3306/RouteX"; // Host e nome del database
+        String username = "root"; // Username del database
+        String password = "ste952r456!"; // Password del database
         Statement stmt = null;
         ResultSet rs = null;
         String fermate = null;
@@ -61,8 +61,6 @@ public class PercorsiDAO {
                         //non ci entra
                         // System.out.println("Temp = " + temporanea+ "Linea_temp = "+linea_temp+" Linea =  "+linea);
                     }
-
-
 
                     if(!linea.equals(linea_temp))
                     {

@@ -19,9 +19,9 @@ public class StationDAO {
         return Stazione_di_Arrivo;
     }
     private void connection(String startstation, String endstation, String citta) throws Exception {
-        String url = "jdbc:mysql://sql8.freesqldatabase.com:3306/sql8747953"; // Host e nome del database
-        String username = "sql8747953"; // Username del database
-        String password = "egM4kA6PMB"; // Password del database
+        String url = "jdbc:mysql://localhost:3306/RouteX"; // Host e nome del database
+        String username = "root"; // Username del database
+        String password = "ste952r456!"; // Password del database
 
         try {
             System.out.println("La città che entra è = " + citta);

@@ -78,7 +78,8 @@ public class ServletDemo extends HttpServlet {
             System.out.println(" ");
             System.out.println("-----------Numero cambi =  "+ numero_cambi);
             for (String s : Linee_Metropolitane) System.out.println("Sequenza di linee metropolitane =  " + s);
-
+            if(numero_cambi == -1)
+                numero_cambi = 0;
 
         } catch (Exception e) {
             throw new RuntimeException(e);

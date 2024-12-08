@@ -305,7 +305,7 @@
                       "Comasina", "Affori FN", "Affori Centro", "Dergano", "Maciachini", "Zara", "Sondrio", "Repubblica", "Turati",
                       "Montenapoleone", "Missori", "Crocetta", "Porta Romana", "Lodi T.I.B.B.", "Brenta", "Corvetto", "Porto di Mare",
                       "Rogoredo FS", "San Donato", "San Cristoforo", "Segneri", "Frattini", "Gelsomini", "Tolstoi", "Washington-Bolivar",
-                      "Foppa", "Solari", "De Amicis", "Vetra", "Santa Sofia", "Sforza-Policlinico", "Tricolore", "Dateo", "Susa", "Argonne",
+                      "De Amicis", "Vetra", "Santa Sofia", "Tricolore", "Dateo", "Susa", "Argonne",
                       "Forlanini FS", "Repetti", "Stazione Forlanini", "Linate Aeroporto", "Bignami", "Ponale", "Bicocca", "Ca' Granda",
                       "Istria", "Marche", "Isola", "Monumentale", "Cenisio", "Gerusalemme", "Domodossola FN", "Tre Torri", "Portello",
                       "Segesta", "San Siro Ippodromo", "San Siro Stadio"],
