@@ -122,6 +122,42 @@
             transform: translateY(-2px);
         }
 
+        .submit {
+                background: linear-gradient(90deg, #0078d7, #005bb5);
+                color: white;
+                font-size: 16px;
+                font-weight: bold;
+                border: none;
+                border-radius: 25px;
+                padding: 10px 20px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                display: inline-block; /* Mantiene il pulsante sulla stessa linea */
+                text-align: center; /* Centra il testo */
+                margin: 20px auto; /* Spaziatura verticale */
+            }
+
+            .submit:hover {
+                background: linear-gradient(90deg, #005bb5, #0078d7);
+                transform: translateY(-3px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            }
+
+            .submit:active {
+                transform: translateY(1px);
+                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+            }
+
+            /* Contenitore per il layout */
+            .button-container {
+                display: flex;
+                justify-content: center; /* Centra il pulsante orizzontalmente */
+                align-items: center; /* Allinea verticalmente se necessario */
+                margin-top: 20px; /* Spaziatura rispetto agli elementi sopra */
+            }
+
+
         /* Animazioni */
         @keyframes fadeIn {
             from {
@@ -246,8 +282,14 @@
 
            out.print("</table>");
 
+            String newcity = city.toLowerCase();
 
             %>
+
+
+            <a href="images/metro-<%= newcity %>.jpg" class="submit" download="<%= city %>_Map.jpg">Download Metropolitan Map</a>
+
+
 
 
         </p>
