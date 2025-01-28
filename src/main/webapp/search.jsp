@@ -180,7 +180,9 @@
                 <select name="endStation" id="endStation">
                     <!-- Opzioni stazioni caricate dinamicamente -->
                 </select>
-
+                <br>
+                <input type="checkbox" name="disabledTraveler" value="yes"> I am a disabled traveler </input>
+                <br><br><br>
                 <button type="submit">Find Route</button>
             </form>
 

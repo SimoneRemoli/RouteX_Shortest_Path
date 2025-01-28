@@ -183,10 +183,34 @@
             <%
             int numero_cambi = (int) request.getAttribute("numero_cambi");
             int numero_stazioni = (int) request.getAttribute("numero");
+            String status = (String) request.getAttribute("status");
+
             //out.println("<li>" + numero_cambi + "</li>");
-            out.print("<h3> Number of metro line changes : " + numero_cambi + "</h3>");
-            out.print("<h3> The number of stations to be traversed : " + numero_stazioni + "</h3>");
+            //out.print("<h3> Type of traveler : <span style='color: red;'>" + status + "</span></h3>");
+            //out.print("<h3> Number of metro line changes : " + numero_cambi + "</h3>");
+            //out.print("<h3> The number of stations to be traversed : " + numero_stazioni + "</h3>");
+
+           out.print("<table border='1' style='width: 100%; border-collapse: collapse; text-align: left;'>");
+           out.print("<tr>");
+           out.print("<th>Information</th>");
+           out.print("<th>Details</th>");
+           out.print("</tr>");
+           out.print("<tr>");
+           out.print("<td>Type of traveler</td>");
+           out.print("<td><span style='color: red;'>" + status + "</span></td>");
+           out.print("</tr>");
+           out.print("<tr>");
+           out.print("<td>Number of metro line changes</td>");
+           out.print("<td>" + numero_cambi + "</td>");
+           out.print("</tr>");
+           out.print("<tr>");
+           out.print("<td>The number of stations to be traversed</td>");
+           out.print("<td>" + numero_stazioni + "</td>");
+           out.print("</tr>");
+           out.print("</table>");
+
             %>
+
 
         </p>
     </div>

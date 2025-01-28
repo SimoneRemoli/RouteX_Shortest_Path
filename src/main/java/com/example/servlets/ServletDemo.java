@@ -27,6 +27,7 @@ public class ServletDemo extends HttpServlet {
     ArrayList<Integer> Percorsi_Codifiche = new ArrayList<Integer>();
     int numero_cambi = 0, numero_stazioni = 0;
     ArrayList<String> Linee_Metropolitane = new ArrayList<String>();
+    String status="";
 
 
 
@@ -37,6 +38,15 @@ public class ServletDemo extends HttpServlet {
         String city = request.getParameter("city");
         String startStation = request.getParameter("startStation");
         String endStation = request.getParameter("endStation");
+        String isDisabledTraveler = request.getParameter("disabledTraveler");
+        if ("yes".equals(isDisabledTraveler))
+        {
+            status = "Disabled Traveler";
+
+        } else
+        {
+            status = "Non-disabled Traveler";
+        }
         int code_start_station = 0, code_finish_station = 0;
         //30
         // Esegui la logica con i dati ricevuti
@@ -97,6 +107,7 @@ public class ServletDemo extends HttpServlet {
         request.setAttribute("numero_cambi", numero_cambi);
         request.setAttribute("linee", Linee_Metropolitane);
         request.setAttribute("numero", numero_stazioni);
+        request.setAttribute("status",status);
         //inoltro la richiesta al jsp
         RequestDispatcher dispatcher = request.getRequestDispatcher("PathNOREG.jsp");
         dispatcher.forward(request, response);
