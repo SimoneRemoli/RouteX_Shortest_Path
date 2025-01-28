@@ -182,8 +182,10 @@
             Information about the route you have just chosen will be provided below.
             <%
             int numero_cambi = (int) request.getAttribute("numero_cambi");
+            int numero_stazioni = (int) request.getAttribute("numero");
             //out.println("<li>" + numero_cambi + "</li>");
             out.print("<h3> Number of metro line changes : " + numero_cambi + "</h3>");
+            out.print("<h3> The number of stations to be traversed : " + numero_stazioni + "</h3>");
             %>
 
         </p>

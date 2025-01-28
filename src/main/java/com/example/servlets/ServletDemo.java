@@ -25,8 +25,9 @@ import java.util.Arrays;
 public class ServletDemo extends HttpServlet {
     ArrayList<String> Percorsi_Con_Nomi = new ArrayList<String>();
     ArrayList<Integer> Percorsi_Codifiche = new ArrayList<Integer>();
-    int numero_cambi = 0;
+    int numero_cambi = 0, numero_stazioni = 0;
     ArrayList<String> Linee_Metropolitane = new ArrayList<String>();
+
 
 
     @Override
@@ -91,9 +92,11 @@ public class ServletDemo extends HttpServlet {
         System.out.println("Nella servlet");
         for(int i=0;i<Percorsi_Con_Nomi.size();i++) System.out.print(" " + Percorsi_Con_Nomi.get(i)+" ---> ");
         for(int i=0;i<Percorsi_Codifiche.size();i++) System.out.println(" " + Percorsi_Codifiche.get(i)+ " ----> ");
+        numero_stazioni = Percorsi_Con_Nomi.size();
         request.setAttribute("percorsi", Percorsi_Con_Nomi);
         request.setAttribute("numero_cambi", numero_cambi);
         request.setAttribute("linee", Linee_Metropolitane);
+        request.setAttribute("numero", numero_stazioni);
         //inoltro la richiesta al jsp
         RequestDispatcher dispatcher = request.getRequestDispatcher("PathNOREG.jsp");
         dispatcher.forward(request, response);
