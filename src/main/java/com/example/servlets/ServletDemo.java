@@ -28,6 +28,9 @@ public class ServletDemo extends HttpServlet {
     int numero_cambi = 0, numero_stazioni = 0;
     ArrayList<String> Linee_Metropolitane = new ArrayList<String>();
     String status="";
+    Double minutaggio = 0.0;
+    Double stazioni_usate = 0.0, app = 0.0;
+
 
 
 
@@ -103,11 +106,22 @@ public class ServletDemo extends HttpServlet {
         for(int i=0;i<Percorsi_Con_Nomi.size();i++) System.out.print(" " + Percorsi_Con_Nomi.get(i)+" ---> ");
         for(int i=0;i<Percorsi_Codifiche.size();i++) System.out.println(" " + Percorsi_Codifiche.get(i)+ " ----> ");
         numero_stazioni = Percorsi_Con_Nomi.size();
+        minutaggio = numero_stazioni*2.5;
+        app = (double)numero_stazioni/metropoli.matriceAdiacenza[0].length;
+        stazioni_usate = (double) app* 100.0;
         request.setAttribute("percorsi", Percorsi_Con_Nomi);
         request.setAttribute("numero_cambi", numero_cambi);
         request.setAttribute("linee", Linee_Metropolitane);
         request.setAttribute("numero", numero_stazioni);
         request.setAttribute("status",status);
+        request.setAttribute("minutaggio",minutaggio);
+        request.setAttribute("inizio",startStation);
+        request.setAttribute("fine",endStation);
+        request.setAttribute("city", city);
+        request.setAttribute("stazionitotali", metropoli.matriceAdiacenza[0].length);
+        request.setAttribute("suolometropolitano",stazioni_usate);
+
+
         //inoltro la richiesta al jsp
         RequestDispatcher dispatcher = request.getRequestDispatcher("PathNOREG.jsp");
         dispatcher.forward(request, response);
