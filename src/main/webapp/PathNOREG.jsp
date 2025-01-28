@@ -142,7 +142,7 @@
         <ul class="route-list">
             <%
                 // Ottieni i dati dall'attributo della richiesta
-                t<String> dati = (List<String>) request.getAttribute("percorsi");
+                List<String> dati = (List<String>) request.getAttribute("percorsi");
                 List<String> linee = (List<String>) request.getAttribute("linee");
 
 

@@ -314,7 +314,7 @@
                        "Dante", "Toledo", "Municipio", "Università", "Duomo", "Garibaldi", "Gianturco", "S.Giovanni-Barra",
                        "Materdei", "Salvator Rosa", "Quattro Giornate", "Vanvitelli", "Medaglie D'Oro", "Montedonzelli",
                        "Rione Alto", "Policlinico", "Colli Aminei", "Frullone", "Chiaiano", "Piscinola", "Mugnano", "Giugliano",
-                       "Aversa Ippodromo", "Aversa Centro"],
+                       "Aversa Ippodromo", "Aversa Centro", "Cavalleggeri Aosta"],
             "London": ["Victoria", "Waterloo", "King's Cross", "Paddington"],
             "Berlin": ["Alexanderplatz", "Hauptbahnhof", "Potsdamer Platz", "Zoologischer Garten"],
             "Stockholm": ["T-Centralen", "Gamla Stan", "Slussen", "Fridhemsplan"],
