@@ -8,7 +8,9 @@ public class PercorsiDAO {
     private ArrayList<String> Percorsi_Con_Fermate = new ArrayList<String>();
     private ArrayList<Integer> Percorsi_Codifica = new ArrayList<Integer>();
     private ArrayList<String> Sequenze_di_cambiamento = new ArrayList<String>();
+    private ArrayList<String> Sequenze_nodi_cruciali = new ArrayList<String>();
     private int cambi_linee_metropolitane = 0;
+    private String nome_stazione_cambio = "";
     ArrayList<String> linee = new ArrayList<String>();
 
 
@@ -16,6 +18,10 @@ public class PercorsiDAO {
     public PercorsiDAO(ArrayList<Integer> a, String city) throws Exception {
         this.Percorsi_Codifica = a;
         connection(Percorsi_Codifica,city);
+    }
+    public ArrayList<String> getSequenze_nodi_cruciali()
+    {
+        return Sequenze_nodi_cruciali;
     }
     public ArrayList<String> getSequenze_di_cambiamento()
     {
@@ -74,6 +80,7 @@ public class PercorsiDAO {
                             cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
                             this.Sequenze_di_cambiamento.add(linea_temp);
                             this.Sequenze_di_cambiamento.add(linea);
+                            this.Sequenze_nodi_cruciali.add(nome_stazione_cambio);
                             check = false;
                             linea_temp = linea;
                         }
@@ -88,6 +95,7 @@ public class PercorsiDAO {
                                 if(no_pass==false)
                                 {
                                     check = true;
+                                    nome_stazione_cambio = fermate;
                                 }
                                 else
                                 {
