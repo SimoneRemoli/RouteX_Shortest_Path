@@ -299,11 +299,16 @@
            }
            else
            {
-
                for(int i=0;i<sequenza_cruciali.size();i++)
                {
                     String stazione = sequenza_cruciali.get(i);
+                    out.print("<span style='color: black; font-weight: bold;'>");
+                    out.print("<ul>");
+                    out.print("<li>");
                     out.print(" " + stazione + " ");
+                    out.print("</li>");
+                    out.print("</ul>");
+                    out.print("</span>");
                }
            }
            out.print("</td>");

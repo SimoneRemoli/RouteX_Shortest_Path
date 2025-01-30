@@ -34,6 +34,22 @@ public class ServletDemo extends HttpServlet {
     Double stazioni_usate = 0.0, app = 0.0;
 
 
+    private void remove_duplicate(ArrayList<String> Sequenze_di_cambiamento_full,int indice)
+    {
+        for(int i=indice;i<Sequenze_di_cambiamento_full.size();i++)
+        {
+            if(i==Sequenze_di_cambiamento_full.size()-1)
+                return;
+            if(Sequenze_di_cambiamento_full.get(i).equals(Sequenze_di_cambiamento_full.get(i+1)))
+            {
+                Sequenze_di_cambiamento_full.remove(i);
+                remove_duplicate(Sequenze_di_cambiamento_full,i);
+
+            }
+        }
+    }
+
+
 
 
     @Override
@@ -97,6 +113,9 @@ public class ServletDemo extends HttpServlet {
             Linee_Metropolitane = metropoli.getLinee();
             Sequenze_di_cambiamento_full = metropoli.getSequenze_di_cambiamento();
             Sequenze_nodi_cruciali_full = metropoli.getSequenze_nodi_cruciali();
+            remove_duplicate(Sequenze_di_cambiamento_full,0);
+
+
 
             System.out.println(" ");
             System.out.println("-----------Numero cambi =  "+ numero_cambi);
