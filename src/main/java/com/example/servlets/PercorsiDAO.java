@@ -7,7 +7,7 @@ public class PercorsiDAO {
 
     private ArrayList<String> Percorsi_Con_Fermate = new ArrayList<String>();
     private ArrayList<Integer> Percorsi_Codifica = new ArrayList<Integer>();
-    private int cambi_linee_metropolitane = -1;
+    private int cambi_linee_metropolitane = 0;
     ArrayList<String> linee = new ArrayList<String>();
 
 
@@ -37,7 +37,8 @@ public class PercorsiDAO {
         ResultSet rs = null;
         String fermate = null;
         String linea = null, linea_temp = "", temporanea="";
-        boolean check = false;
+        boolean check = false, no_pass=false;
+        int count_bin = 0;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Caricamento del driver
@@ -55,35 +56,53 @@ public class PercorsiDAO {
                 {
                     fermate = rs.getString("nome");
                     linea = rs.getString("linea");
-                    if(temporanea.equals(linea))
+
+                    if((!linea_temp.equals(linea))&&(i==1))
                     {
-                        cambi_linee_metropolitane = cambi_linee_metropolitane - 2;
-                        //non ci entra
-                        // System.out.println("Temp = " + temporanea+ "Linea_temp = "+linea_temp+" Linea =  "+linea);
+                        no_pass = true;
                     }
 
-                    if(!linea.equals(linea_temp))
+                    if(check)
                     {
-
-                            temporanea = linea_temp;
+                        if(!linea_temp.equals(linea))
+                        {
                             cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
-
+                            check = false;
+                            linea_temp = linea;
+                        }
+                        else {
+                            check = false;
+                            linea_temp = linea;
+                        }
                     }
+                    else {
+                        if (!(count_bin == 0)) {
+                            if (!linea_temp.equals(linea)) {
+                                if(no_pass==false)
+                                {
+                                    check = true;
+                                }
+                                else
+                                {
+                                    no_pass = false;
+                                    linea_temp = linea;
+                                }
 
+                            } else {
+                                linea_temp = linea;
+                            }
+                        } else if (count_bin == 0) {
+                            linea_temp = linea;
+                            count_bin = count_bin + 1;
 
-                    linea_temp = linea;
-
-                    this.Percorsi_Con_Fermate.add(fermate);
+                        }
+                    }
+                    this.Percorsi_Con_Fermate.add(fermate); //linea che consente di stampare i percorsi con fermate (non toccare)
                     this.linee.add(linea);
                 }
                     System.out.println("Numero cambi = "+ cambi_linee_metropolitane);
-                if(i==Percorsi_Codifica.size()-1) //se siamo all'ultima fermata
-                {
-                    if(linea.equals(linea_temp))
-                    {
-                        cambi_linee_metropolitane = cambi_linee_metropolitane - 1;
-                    }
-                }
+
+
             }
             rs.close();
             stmt.close();
@@ -106,7 +125,7 @@ public class PercorsiDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        this.cambi_linee_metropolitane = this.cambi_linee_metropolitane - (this.cambi_linee_metropolitane/2);
+        //this.cambi_linee_metropolitane = this.cambi_linee_metropolitane - (this.cambi_linee_metropolitane/2);
         System.out.println("CAMBI LINEE METROPOLITANE in PercorsiDAO.Java = " + cambi_linee_metropolitane);
     }
 
