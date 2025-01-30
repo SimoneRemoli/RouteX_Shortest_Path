@@ -226,6 +226,7 @@
             String city = (String) request.getAttribute("city");
             int stazionitotali = (int) request.getAttribute("stazionitotali");
             Double suolo = (Double) request.getAttribute("suolometropolitano");
+            List<String> sequenza_cambi = (List<String>) request.getAttribute("listacambi");
 
             //out.println("<li>" + numero_cambi + "</li>");
             //out.print("<h3> Type of traveler : <span style='color: red;'>" + status + "</span></h3>");
@@ -263,6 +264,24 @@
            out.print("<td>Number of metro line changes</td>");
            out.print("<td>" + numero_cambi + "</td>");
            out.print("</tr>");
+
+           out.print("<tr>");
+           out.print("<td>List of all metro line changes </td>");
+           out.print("<td>");
+
+
+           for(int i=0;i<sequenza_cambi.size();i++)
+           {
+                String linea_singola = sequenza_cambi.get(i);
+                out.print(" " + linea_singola + " ");
+
+           }
+           out.print("</td>");
+
+           out.print("</tr>");
+
+
+
            out.print("<tr>");
            out.print("<td>The number of stations to be traversed</td>");
            out.print("<td>" + numero_stazioni + "</td>");

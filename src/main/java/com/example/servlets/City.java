@@ -17,6 +17,7 @@ public  abstract class City
     }*/
     ArrayList<Integer> percorsi_codifica = new ArrayList<Integer>();
     ArrayList<String> Percorsi_Con_Nomi = new ArrayList<String>();
+    ArrayList<String> Sequenze_di_cambiamento = new ArrayList<String>();
     private int numero_cambi;
     ArrayList<String> linee = new ArrayList<String>();
     protected int[][] matriceAdiacenza; //le classi figlie possono specializzare la loro matrice di adiacenza
@@ -182,9 +183,14 @@ public  abstract class City
         for(int i=0;i<Percorsi_Con_Nomi.size();i++) System.out.print(" " + Percorsi_Con_Nomi.get(i)+" ---> ");
         numero_cambi = percorso.getCambi_linee_metropolitane();
         linee = percorso.getLinee();
+        Sequenze_di_cambiamento = percorso.getSequenze_di_cambiamento();
 
 
 
+    }
+    public ArrayList<String> getSequenze_di_cambiamento()
+    {
+        return Sequenze_di_cambiamento;
     }
     public int getNumero_cambi()
     {

@@ -27,6 +27,7 @@ public class ServletDemo extends HttpServlet {
     ArrayList<Integer> Percorsi_Codifiche = new ArrayList<Integer>();
     int numero_cambi = 0, numero_stazioni = 0;
     ArrayList<String> Linee_Metropolitane = new ArrayList<String>();
+    ArrayList<String> Sequenze_di_cambiamento_full = new ArrayList<String>();
     String status="";
     Double minutaggio = 0.0;
     Double stazioni_usate = 0.0, app = 0.0;
@@ -93,6 +94,8 @@ public class ServletDemo extends HttpServlet {
             Percorsi_Codifiche = metropoli.getPercorsi_codifica();
             numero_cambi = metropoli.getNumero_cambi();
             Linee_Metropolitane = metropoli.getLinee();
+            Sequenze_di_cambiamento_full = metropoli.getSequenze_di_cambiamento();
+
             System.out.println(" ");
             System.out.println("-----------Numero cambi =  "+ numero_cambi);
             for (String s : Linee_Metropolitane) System.out.println("Sequenza di linee metropolitane =  " + s);
@@ -120,6 +123,7 @@ public class ServletDemo extends HttpServlet {
         request.setAttribute("city", city);
         request.setAttribute("stazionitotali", metropoli.matriceAdiacenza[0].length);
         request.setAttribute("suolometropolitano",stazioni_usate);
+        request.setAttribute("listacambi", Sequenze_di_cambiamento_full);
 
 
         //inoltro la richiesta al jsp
