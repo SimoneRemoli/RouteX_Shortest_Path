@@ -281,6 +281,8 @@
                for(int i=0;i<sequenza_cambi.size();i++)
                {
                     String linea_singola = sequenza_cambi.get(i);
+                    out.print("<img src='images/"+ linea_singola + ".png' alt='Logo' width='30' height='20' />");
+
                     out.print(" " + linea_singola + " ");
 
                }
