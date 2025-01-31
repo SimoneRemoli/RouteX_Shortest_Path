@@ -11,6 +11,7 @@ public class PercorsiDAO {
     private ArrayList<String> Sequenze_nodi_cruciali = new ArrayList<String>();
     private int cambi_linee_metropolitane = 0;
     private String nome_stazione_cambio = "";
+    private String precedente = "";
     ArrayList<String> linee = new ArrayList<String>();
 
 
@@ -77,12 +78,21 @@ public class PercorsiDAO {
                     {
                         if(!linea_temp.equals(linea))
                         {
-                            cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
-                            this.Sequenze_di_cambiamento.add(linea_temp);
-                            this.Sequenze_di_cambiamento.add(linea);
-                            this.Sequenze_nodi_cruciali.add(nome_stazione_cambio);
-                            check = false;
-                            linea_temp = linea;
+                            if(linea.contains("-"))
+                            {
+                                linea_temp = precedente;
+                                nome_stazione_cambio = fermate;
+                                check = true;
+
+                            }
+                            else {
+                                cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
+                                this.Sequenze_di_cambiamento.add(linea_temp);
+                                this.Sequenze_di_cambiamento.add(linea);
+                                this.Sequenze_nodi_cruciali.add(nome_stazione_cambio);
+                                check = false;
+                                linea_temp = linea;
+                            }
                         }
                         else {
                             check = false;
@@ -95,7 +105,8 @@ public class PercorsiDAO {
                                 if(no_pass==false)
                                 {
                                     check = true;
-                                    nome_stazione_cambio = fermate;
+                                    precedente = linea;
+                                    nome_stazione_cambio = fermate; //la aggiungo solo se poi effettivamente rispetta check
                                 }
                                 else
                                 {
