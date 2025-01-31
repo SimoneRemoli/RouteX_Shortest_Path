@@ -33,6 +33,21 @@ public class ServletDemo extends HttpServlet {
     Double minutaggio = 0.0;
     Double stazioni_usate = 0.0, app = 0.0;
 
+    private void remove_change_lines(ArrayList<String> Sequenze_di_cambiemento_full)
+    {
+        for(int i=0;i<Sequenze_di_cambiemento_full.size();i++)
+        {
+            if(Sequenze_di_cambiemento_full.get(i).contains("-"))
+            {
+                Sequenze_di_cambiemento_full.remove(i);
+            }
+        }
+        for(int i=0;i<Sequenze_di_cambiemento_full.size();i++)
+        {
+            System.out.println("Valore = " + Sequenze_di_cambiemento_full.get(i));
+        }
+    }
+
 
     private void remove_duplicate(ArrayList<String> Sequenze_di_cambiamento_full,int indice)
     {
@@ -47,6 +62,7 @@ public class ServletDemo extends HttpServlet {
 
             }
         }
+
     }
 
 
@@ -114,6 +130,8 @@ public class ServletDemo extends HttpServlet {
             Sequenze_di_cambiamento_full = metropoli.getSequenze_di_cambiamento();
             Sequenze_nodi_cruciali_full = metropoli.getSequenze_nodi_cruciali();
             remove_duplicate(Sequenze_di_cambiamento_full,0);
+            remove_change_lines(Sequenze_di_cambiamento_full);
+
 
 
 

@@ -49,7 +49,7 @@ public class PercorsiDAO {
         ResultSet rs = null;
         String fermate = null;
         String linea = null, linea_temp = "", temporanea="";
-        boolean check = false, no_pass=false;
+        boolean check = false, no_pass=false,controllo=false;
         int count_bin = 0;
 
         try {
@@ -69,6 +69,10 @@ public class PercorsiDAO {
                     fermate = rs.getString("nome");
                     linea = rs.getString("linea");
 
+                    if(((linea.contains("-")))&&(i==0))
+                    {
+                        controllo = true;
+                    }
                     if((!linea_temp.equals(linea))&&(i==1))
                     {
                         no_pass = true;
@@ -102,16 +106,23 @@ public class PercorsiDAO {
                     else {
                         if (!(count_bin == 0)) {
                             if (!linea_temp.equals(linea)) {
-                                if(no_pass==false)
+
+                                if((i==1)&&(controllo==false))
                                 {
                                     check = true;
                                     precedente = linea;
                                     nome_stazione_cambio = fermate; //la aggiungo solo se poi effettivamente rispetta check
-                                }
-                                else
-                                {
                                     no_pass = false;
-                                    linea_temp = linea;
+                                }
+                                else {
+                                    if (no_pass == false) {
+                                        check = true;
+                                        precedente = linea;
+                                        nome_stazione_cambio = fermate; //la aggiungo solo se poi effettivamente rispetta check
+                                    } else {
+                                        no_pass = false;
+                                        linea_temp = linea;
+                                    }
                                 }
 
                             } else {

@@ -202,7 +202,7 @@
                 "Termini", "Vittorio Emanuele", "Manzoni", "San Giovanni", "Re di Roma",
                 "Ponte Lungo", "Furio Camillo", "Colli Albani", "Arco di Travertino",
                 "Porta Furba", "Numidio Quadrato", "Lucio Sestio", "Giulio Agricola",
-                "Subaugusta", "Cinecittà", "Anagnina", "Pantano", "Graniti",
+                "Subaugusta", "Cinecitta", "Anagnina", "Pantano", "Graniti",
                 "Finocchio", "Bolognetta", "Borghesiana", "Due Leoni - Fontana Candida", "Grotte Celoni",
                 "Torre Gaia", "Torre Angela", "Torrenova", "Giardinetti", "Torre Maura",
                 "Torre Spaccata", "Alessandrino", "Parco di Centocelle", "Mirti",
