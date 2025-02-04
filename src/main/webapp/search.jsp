@@ -321,7 +321,7 @@
 
             "London": ["Chesham", "Amersham", "Chalfont&Latimer", "Chorleywood", "Rickmansworth", "Croxley", "Watford", "Moor Park",
                         "Northwood", "Northwood Hills", "Pinner", "North Harrow", "Harrow on the Hill", "West Harrow", "Eastcote",
-                        "Ruislip Manor", "Ruislip", "Ickenham", "Hillingdon", "Uxbridge", "Kenton", "Harrow&Wealdstone",
+                        "Ruislip Manor", "Northwick Park" "Ruislip", "Ickenham", "Hillingdon", "Uxbridge", "Kenton", "Harrow&Wealdstone",
                         "Headstone Lane", "Hatch End", "Carpenders Park", "Bushey", "Watford High Street", "Watford Junction",
                         "Preston Road", "Wembley Park",
                         "Finchley Road", "Baker Street", "Great Portland Street", "Euston Square", "Euston",
@@ -417,7 +417,7 @@
                         "Hendon", "Mill Hill Broadway", "Elstree/Borehamwood",
                         "Towards St Albans City and Luton Airport Parkway", "Edgware", "Burnt Oak",
                         "Hendon Central", "Brent Cross", "Golders Green", "Hampstead", "Gospel Oak",
-                        "Kentish Town West", "Camden Road", "Tooting", "Stepney Green", "Rayners Lane", "Temple",
+                        "Kentish Town West", "Camden Road", "Tooting", "Stepney Green", "Rayners Lane",
                         "Mansion House", "North Greenwich", "Ravensbourne"],
             "Berlin": ["Alexanderplatz", "Hauptbahnhof", "Potsdamer Platz", "Zoologischer Garten"],
             "Stockholm": ["T-Centralen", "Gamla Stan", "Slussen", "Fridhemsplan"],
