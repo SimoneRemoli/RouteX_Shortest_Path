@@ -475,9 +475,6 @@
                     }
 
                     let selectedCity = document.getElementById("citySelect").value;
-                    if (!selectedCity || !cityStations[selectedCity]) {
-                        return;
-                    }
 
                     let suggestions = cityStations[selectedCity].filter(station => station.toLowerCase().includes(input));
 
