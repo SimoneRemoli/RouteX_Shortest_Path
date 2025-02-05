@@ -2,7 +2,7 @@
   RouteX - Find Your Metro Route
   <img src="https://raw.githubusercontent.com/SimoneRemoli/RouteX_Shortest_Path/refs/heads/main/src/main/webapp/images/logo-no-background.png" width="30px"/>
 </h1>
-**RouteX** is a powerful metro route finder that allows users to search for stations in real-time, select a city, and view an interactive metro map. Featuring dynamic autocomplete, RouteX helps travelers quickly find the best metro routes with ease. 🚇✨
+__RouteX__ is a powerful metro route finder that allows users to search for stations in real-time, select a city, and view an interactive metro map. Featuring dynamic autocomplete, RouteX helps travelers quickly find the best metro routes with ease. 🚇✨
 
 <p align="center"> </p>
 
