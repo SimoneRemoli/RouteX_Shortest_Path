@@ -5,6 +5,37 @@
     <title>RouteX - Metro Finder</title>
     <style>
         /* Stile di base per la pagina */
+        .searchBox {
+                    width: 90%;
+                    padding: 10px;
+                    font-size: 18px;
+                    border-radius: 10px;
+                    border: 1px solid #007bff;
+                    margin-bottom: 10px;
+                }
+
+                /* Contenitore per i risultati */
+                .searchResults {
+                    border: 1px solid #ccc;
+                    max-height: 200px;
+                    overflow-y: auto;
+                    background: white;
+                    width: 90%;
+                    position: absolute;
+                    z-index: 1000;
+                    display: none;
+                }
+
+                /* Stile per ogni risultato */
+                .resultItem {
+                    padding: 10px;
+                    cursor: pointer;
+                    border-bottom: 1px solid #ddd;
+                }
+
+                .resultItem:hover {
+                    background-color: #f0f0f0;
+                }
         body {
             background: linear-gradient(to bottom, #e0f7fa, #80deea);
             font-family: 'Arial Rounded MT Bold', sans-serif;
@@ -173,16 +204,18 @@
                     <option value="Budapest">Budapest</option>
                 </select>
 
-                <select name="startStation" id="startStation">
-                    <!-- Opzioni stazioni caricate dinamicamente -->
-                </select>
 
-                <select name="endStation" id="endStation">
-                    <!-- Opzioni stazioni caricate dinamicamente -->
-                </select>
                 <br>
                 <input type="checkbox" name="disabledTraveler" value="yes"> I am a disabled traveler </input>
                 <br><br><br>
+
+                <!-- servono due ID diversi per il fronted in JSP per gestire le stazioni, i name servono per la servlet backend -->
+                <input type="text" name="startStation" id="startSearchBox" class="searchBox" placeholder="Search start station..." onkeyup="searchStation('startSearchBox', 'startSearchResults')">
+                <div id="startSearchResults" class="searchResults"></div>
+
+                <input type="text" name="endStation" id="endSearchBox" class="searchBox" placeholder="Search end station..." onkeyup="searchStation('endSearchBox', 'endSearchResults')">
+                <div id="endSearchResults" class="searchResults"></div>
+
                 <button type="submit">Find Route</button>
             </form>
 
@@ -425,10 +458,48 @@
             "Budapest": ["Deák Ferenc tér", "Kálvin tér", "Astoria", "Keleti pályaudvar"]
         };
 
+
+        function searchStation(inputId, resultsId) {
+                    let input = document.getElementById(inputId).value.toLowerCase();
+                    let resultsDiv = document.getElementById(resultsId);
+                    resultsDiv.innerHTML = ""; // Pulisce i risultati precedenti
+
+                    if (input.length < 1) {
+                        resultsDiv.style.display = "none";
+                        return;
+                    }
+
+                    let selectedCity = document.getElementById("citySelect").value;
+                    if (!selectedCity || !cityStations[selectedCity]) {
+                        return;
+                    }
+
+                    let suggestions = cityStations[selectedCity].filter(station => station.toLowerCase().includes(input));
+
+                    if (suggestions.length > 0) {
+                        resultsDiv.style.display = "block"; // Mostra i risultati
+                    } else {
+                        resultsDiv.style.display = "none"; // Nasconde se non ci sono risultati
+                    }
+
+                    suggestions.forEach(station => {
+                        let div = document.createElement("div");
+                        div.classList.add("resultItem");
+                        div.textContent = station;
+
+                        div.onclick = function () {
+                            document.getElementById(inputId).value = station;
+                            resultsDiv.style.display = "none"; // Nasconde i suggerimenti dopo la selezione
+                        };
+
+                        resultsDiv.appendChild(div);
+                    });
+                }
+
         function updateStationsAndMap() {
             const citySelect = document.getElementById('citySelect');
-            const startStation = document.getElementById('startStation');
-            const endStation = document.getElementById('endStation');
+            const startSearchBox = document.getElementById('startSearchBox');
+            const endSearchBox = document.getElementById('endSearchBox');
             const mapImage = document.getElementById('mapImage');
             const selectedCity = citySelect.value;
 
@@ -437,32 +508,20 @@
                 return;
             }
 
-            // Aggiorna le opzioni delle stazioni in base alla città selezionata
-            const stations = cityStations[selectedCity] || [];
-
-            // Funzione per aggiornare le opzioni in un menu a tendina
-            function updateDropdown(dropdown) {
-                dropdown.innerHTML = ""; // Svuota il menu a tendina
-                stations.forEach(station => {
-                    const option = document.createElement("option");
-                    option.value = station;
-                    option.text = station;
-                    dropdown.appendChild(option);
-                });
-            }
-
-            // Aggiorna entrambi i menu a tendina
-            updateDropdown(startStation);
-            updateDropdown(endStation);
-
             // Aggiorna l'immagine della mappa in base alla città selezionata
             mapImage.src = 'images/metro-' + selectedCity.toLowerCase() + '.jpg';
+
+            // Aggiorna i placeholder delle caselle di testo
+            startSearchBox.placeholder = `Search stations in ${selectedCity}...`;
+            endSearchBox.placeholder = `Search stations in ${selectedCity}...`;
+
+            // Svuota il contenuto delle caselle di testo e nasconde i suggerimenti
+            startSearchBox.value = "";
+            endSearchBox.value = "";
+            document.getElementById('startSearchResults').innerHTML = "";
+            document.getElementById('endSearchResults').innerHTML = "";
         }
 
-        // Inizializza le stazioni e la mappa per la città di default solo al caricamento
-        document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById("mapImage").src = "images/subway_default.png";
-        });
     </script>
 
 </body>
