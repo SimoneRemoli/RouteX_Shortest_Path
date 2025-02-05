@@ -16,3 +16,21 @@ RouteX is a powerful metro route finder that allows users to search for stations
 <p align="center">Developers and Creators </p>
 
 <table align="center"> <tr> <td align="center"> <a href="https://github.com/SimoneRemoli"> <img src="https://avatars.githubusercontent.com/u/118252611?v=4" width="100px;" alt=""/><br /> <sub><b>Simone Remoli</b></sub> </a> </td> <td align="center"> <a href="https://github.com/iPalateee"> <img src="https://avatars.githubusercontent.com/u/75428846?v=4" width="100px;" alt=""/><br /> <sub><b>iPalateee</b></sub> </a> </td>  </tr> </table>
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <a href="https://github.com/SimoneRemoli">
+        <img src="https://avatars.githubusercontent.com/u/118252611?v=4" width="100px" style="border-radius: 50%;" alt="Simone Remoli"/><br />
+        <sub><b>Simone Remoli</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/iPalateee">
+        <img src="https://avatars.githubusercontent.com/u/75428846?v=4" width="100px" style="border-radius: 50%;" alt="iPalateee"/><br />
+        <sub><b>iPalateee</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
