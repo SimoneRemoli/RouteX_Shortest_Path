@@ -520,11 +520,6 @@
             startSearchBox.placeholder = `Search stations in ${selectedCity}...`;
             endSearchBox.placeholder = `Search stations in ${selectedCity}...`;
 
-            // Svuota il contenuto delle caselle di testo e nasconde i suggerimenti
-            startSearchBox.value = "";
-            endSearchBox.value = "";
-            document.getElementById('startSearchResults').innerHTML = "";
-            document.getElementById('endSearchResults').innerHTML = "";
         }
 
     </script>
