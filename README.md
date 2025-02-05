@@ -19,6 +19,7 @@ RouteX is a powerful metro route finder that allows users to search for stations
 <hr/>
 
 
+<img width="1440" alt="Screenshot 2025-02-05 alle 19 31 01" src="https://github.com/user-attachments/assets/be014ef4-cd44-4706-9ef5-570cb6a9f22e" />
 
 
 
