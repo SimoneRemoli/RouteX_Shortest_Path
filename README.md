@@ -7,7 +7,7 @@
 <p align="center"> </p>
 
 
-<p align="center"><img src= "https://cdn.pixabay.com/photo/2018/07/14/11/32/network-3537400_960_720.png" alt="MaxKB" width="300" /></p>
+<p align="center"><img src= "https://raw.githubusercontent.com/SimoneRemoli/RouteX_Shortest_Path/refs/heads/main/src/main/webapp/images/logo-no-background.png" alt="MaxKB" width="300" /></p>
 <h3 align="center">Simone Remoli</h3>
 <h3 align="center">Lorenzo Brondi</h3>
 
