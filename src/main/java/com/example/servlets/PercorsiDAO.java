@@ -51,7 +51,7 @@ public class PercorsiDAO {
         ResultSet rs = null;
         String fermate = null;
         String linea = null, linea_temp = "", temporanea="";
-        boolean check = false, no_pass=false,controllo=false;
+        boolean check = false, no_pass=false,controllo=false,ci_son_passato=false;
         int count_bin = 0,quanto_ci_passo=0;
 
         try {
@@ -94,7 +94,7 @@ public class PercorsiDAO {
                                 in_mezzo.add(linea);
                                 in_mezzo_nomi.add(fermate);
                                 check = true;
-
+                                ci_son_passato = true;
                             }
                             else {
                                 cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
@@ -106,7 +106,7 @@ public class PercorsiDAO {
                                 {
                                     for(int j=0;j<in_mezzo.size();j++)
                                     {
-                                        if(in_mezzo.get(j).contains(ev))
+                                        if(in_mezzo.get(j).contains(linea))
                                         {
                                             this.Sequenze_nodi_cruciali.add(in_mezzo_nomi.get(j));
                                         }
@@ -121,8 +121,18 @@ public class PercorsiDAO {
                             }
                         }
                         else {
+
                             check = false;
                             linea_temp = linea;
+
+                            if(ci_son_passato==true)
+                            {
+                                in_mezzo.clear();
+                                in_mezzo_nomi.clear();
+                                check = false;
+                                linea_temp = linea;
+                                ci_son_passato = false;
+                            }
                         }
                     }
                     else {
@@ -144,6 +154,14 @@ public class PercorsiDAO {
                                         check = true;
                                         precedente = linea;
                                         nome_stazione_cambio = fermate; //la aggiungo solo se poi effettivamente rispetta check
+
+
+                                        in_mezzo.add(linea);
+                                        in_mezzo_nomi.add(fermate);
+                                        ev = linea_temp;
+                                        ci_son_passato = true;
+
+
                                     } else {
                                         no_pass = false;
                                         linea_temp = linea;
