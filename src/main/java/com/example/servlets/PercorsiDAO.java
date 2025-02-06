@@ -9,6 +9,10 @@ public class PercorsiDAO {
     private ArrayList<Integer> Percorsi_Codifica = new ArrayList<Integer>();
     private ArrayList<String> Sequenze_di_cambiamento = new ArrayList<String>();
     private ArrayList<String> Sequenze_nodi_cruciali = new ArrayList<String>();
+    private ArrayList<String> lista_appoggio = new ArrayList<String>();
+    private ArrayList<String> nome_cambio = new ArrayList<String>();
+    private ArrayList<String> cambi = new ArrayList<String>();
+
     private int cambi_linee_metropolitane = 0;
     private String nome_stazione_cambio = "", ev="";
     private String precedente = "";
@@ -50,9 +54,9 @@ public class PercorsiDAO {
         Statement stmt = null;
         ResultSet rs = null;
         String fermate = null;
-        String linea = null, linea_temp = "", temporanea="";
+        String linea = null, linea_temp = "", temporanea="", da_raggiungere="",temp="";
         boolean check = false, no_pass=false,controllo=false,ci_son_passato=false;
-        int count_bin = 0,quanto_ci_passo=0;
+        int count_bin = 0,quanto_ci_passo=0, con=0;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Caricamento del driver
@@ -104,13 +108,79 @@ public class PercorsiDAO {
                                     this.Sequenze_nodi_cruciali.add(nome_stazione_cambio);
                                 else
                                 {
-                                    for(int j=0;j<in_mezzo.size();j++)
+                                    /*for(int j=0;j<in_mezzo.size();j++)
                                     {
-                                        if(in_mezzo.get(j).contains(linea))
+                                        if(in_mezzo.get(j).contains(ev))
                                         {
-                                            this.Sequenze_nodi_cruciali.add(in_mezzo_nomi.get(j));
+                                            con = con + 1; //con=0
+                                            if(con==in_mezzo.size())
+                                            {
+                                                for(int l=0;l<in_mezzo.size();l++)
+                                                {
+                                                    if(in_mezzo.get(l).contains(linea))
+                                                    {
+                                                        this.Sequenze_nodi_cruciali.add(in_mezzo_nomi.get(l));
+                                                        l=in_mezzo.size();
+                                                    }
+                                                }
+                                            }
+
+                                            //this.Sequenze_nodi_cruciali.add(in_mezzo_nomi.get(j));
+                                        }
+                                        else {
+                                            this.Sequenze_nodi_cruciali.add(in_mezzo_nomi.get(j-1));
                                         }
                                     }
+                                    */
+                                while(!(da_raggiungere.equals(ev)))
+                                {
+                                            for (int j = 0; j < in_mezzo.size(); j++) {
+                                                if (in_mezzo.get(j).contains(linea)) {
+                                                    temp = in_mezzo.get(j);
+                                                    nome_cambio.add(in_mezzo_nomi.get(j)); //nome_cambio ho tutto
+                                                    lista_appoggio.add(temp);
+                                                    in_mezzo.set(j,"");
+                                                    in_mezzo_nomi.set(j,"");
+
+                                                }
+                                            }
+                                            //puo essere che lista appoggio abbia più di un elemento
+                                            //ora strtok sugli elementi iesimi
+                                            for (int l = 0; l < lista_appoggio.size(); l++)
+                                            {
+
+                                                String[] parole = lista_appoggio.get(l).split("-");
+                                                for (String parola : parole) {
+                                                    //System.out.println(parola);
+                                                    if (!(parola.equals(linea))) //se parola != linea
+                                                    {
+                                                        da_raggiungere = parola;
+                                                        if (!(da_raggiungere.equals(ev))) {
+                                                            linea = da_raggiungere;
+                                                            cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
+                                                            cambi.add(nome_cambio.get(l));
+                                                            l=1000;
+                                                            break; //esce dal for
+                                                        }
+                                                        else
+                                                        {
+                                                            cambi.add(nome_cambio.get(l)); //ok
+                                                            l=1000;
+                                                        }
+
+
+                                                        //linea = da_raggiungere;
+
+                                                    }
+
+                                                }
+
+                                            }
+
+                                            lista_appoggio.clear();
+                                            nome_cambio.clear();
+                                }
+
                                 }
                                 in_mezzo.clear();
                                 in_mezzo_nomi.clear();
@@ -187,6 +257,16 @@ public class PercorsiDAO {
             rs.close();
             stmt.close();
             conn.close();
+
+
+
+            for(int i=cambi.size()-1;i>=0;i--)
+            {
+                System.out.println(" CAMBIO = " + cambi.get(i));
+                this.Sequenze_nodi_cruciali.add(cambi.get(i));
+
+            }
+
           //  String query = "select id from " + citta + " where nome=?";
             //System.out.println("Query =  " + query);
            // Statement stmt = conn.createStatement();
