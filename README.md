@@ -30,5 +30,48 @@ RouteX is a powerful metro route finder that allows users to search for stations
 <hr/>
 <img width="1440" alt="Screenshot 2025-02-06 alle 09 54 45" src="https://github.com/user-attachments/assets/9e93ddf6-65cb-43ea-90fc-dd50fe9d2022" />
 
+## Key Features
+- **Interactive visualization** of metro lines and stations.
+- **Accessibility support**, indicating stations suitable for disabled passengers.
+- **Optimized data management** for easy integration with relational databases.
+- **User-friendly interface**, scalable across different devices.
+- **REST API** for integration with third-party applications.
+
+## Installation
+To run RouteX locally, follow these steps:
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/RouteX.git
+cd RouteX
+
+# Install dependencies
+npm install # If the project uses Node.js
+or
+mvn clean install # If the project uses Maven
+
+# Install Tomcat 9.0.96
+download and extract Apache Tomcat 9.0.96 from: https://tomcat.apache.org/download-90.cgi
+set up the environment variables accordingly
+
+# Start the server
+npm start # For Node.js
+or
+mvn spring-boot:run # For Java Spring Boot
+```
+
+## Contributions
+We welcome community contributions! If you'd like to contribute:
+1. Fork the repository
+2. Create a branch for your changes (`git checkout -b feature-name`)
+3. Submit a pull request
+
+## License
+This project is distributed under the MIT License. See the LICENSE file for more details.
+
+---
+
+⭐ If you like RouteX, give it a star on GitHub! ⭐
+
 
 
