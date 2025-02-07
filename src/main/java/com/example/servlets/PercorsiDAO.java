@@ -12,6 +12,9 @@ public class PercorsiDAO {
     private ArrayList<String> lista_appoggio = new ArrayList<String>();
     private ArrayList<String> nome_cambio = new ArrayList<String>();
     private ArrayList<String> cambi = new ArrayList<String>();
+    private ArrayList<String> cambi_iniziali = new ArrayList<String>();
+    private ArrayList<String> cambi_iniziali_linee = new ArrayList<String>();
+
 
     private int cambi_linee_metropolitane = 0;
     private String nome_stazione_cambio = "", ev="";
@@ -54,9 +57,9 @@ public class PercorsiDAO {
         Statement stmt = null;
         ResultSet rs = null;
         String fermate = null;
-        String linea = null, linea_temp = "", temporanea="", da_raggiungere="",temp="";
-        boolean check = false, no_pass=false,controllo=false,ci_son_passato=false;
-        int count_bin = 0,quanto_ci_passo=0, con=0;
+        String linea = null, linea_temp = "", temporanea="", da_raggiungere="",temp="",successivo="",success="";
+        boolean check = false, no_pass=false,controllo=false,ci_son_passato=false,stopping=false,ancora=false,uno=false;
+        int count_bin = 0,quanto_ci_passo=0, con=0,contatore=0,count=0;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Caricamento del driver
@@ -78,10 +81,39 @@ public class PercorsiDAO {
                     if(((linea.contains("-")))&&(i==0))
                     {
                         controllo = true;
+                        cambi_iniziali.add(fermate);
+                        cambi_iniziali_linee.add(linea);
+                        uno=true;
                     }
-                    if((!linea_temp.equals(linea))&&(i==1))
+
+                    if(((linea.contains("-")))&&(i==1))
                     {
                         no_pass = true;
+                        cambi_iniziali.add(fermate);
+                        cambi_iniziali_linee.add(linea);
+                        stopping = false;
+                        if(uno)
+                            ancora = true;
+
+                    }
+                    else if((!linea_temp.equals(linea))&&(i==1))
+                    {
+                        no_pass = true;
+                    }
+                    if((stopping==false)&&(ancora==true)) {
+                        if (i > 1) {
+                            if ((linea.contains("-"))) {
+                                stopping = false;
+                                no_pass = true;
+                                cambi_iniziali.add(fermate);
+                                cambi_iniziali_linee.add(linea);
+                                ancora=true;
+                            } else {
+                                stopping = true;
+                                success = linea;
+                                no_pass = true;
+                            }
+                        }
                     }
 
                     if(check)
@@ -103,7 +135,7 @@ public class PercorsiDAO {
                             else {
                                 cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
                                 this.Sequenze_di_cambiamento.add(linea_temp);
-                                this.Sequenze_di_cambiamento.add(linea);
+                                successivo = linea;
                                 if(quanto_ci_passo == 0)
                                     this.Sequenze_nodi_cruciali.add(nome_stazione_cambio);
                                 else
@@ -132,22 +164,35 @@ public class PercorsiDAO {
                                         }
                                     }
                                     */
-                                while(!(da_raggiungere.equals(ev)))
-                                {
+
+                                    for (int j = 0; j < in_mezzo.size()-1; j++)
+                                    {
+                                        if(in_mezzo.get(j).equals(in_mezzo.get(j+1)))
+                                        {
+                                            count = count + 1;
+                                        }
+                                    }
+                                    if(count==in_mezzo.size()-1)
+                                    {
+                                        count = 0;
+                                        this.Sequenze_nodi_cruciali.add(in_mezzo_nomi.get(in_mezzo_nomi.size()-1));
+                                    }
+                                    else {
+
+                                        while (!(da_raggiungere.equals(ev))) {
                                             for (int j = 0; j < in_mezzo.size(); j++) {
                                                 if (in_mezzo.get(j).contains(linea)) {
                                                     temp = in_mezzo.get(j);
                                                     nome_cambio.add(in_mezzo_nomi.get(j)); //nome_cambio ho tutto
                                                     lista_appoggio.add(temp);
-                                                    in_mezzo.set(j,"");
-                                                    in_mezzo_nomi.set(j,"");
+                                                    in_mezzo.set(j, "");
+                                                    in_mezzo_nomi.set(j, "");
 
                                                 }
                                             }
                                             //puo essere che lista appoggio abbia più di un elemento
                                             //ora strtok sugli elementi iesimi
-                                            for (int l = 0; l < lista_appoggio.size(); l++)
-                                            {
+                                            for (int l = 0; l < lista_appoggio.size(); l++) {
 
                                                 String[] parole = lista_appoggio.get(l).split("-");
                                                 for (String parola : parole) {
@@ -157,15 +202,14 @@ public class PercorsiDAO {
                                                         da_raggiungere = parola;
                                                         if (!(da_raggiungere.equals(ev))) {
                                                             linea = da_raggiungere;
+                                                            this.Sequenze_di_cambiamento.add(linea);
                                                             cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
                                                             cambi.add(nome_cambio.get(l));
-                                                            l=1000;
+                                                            l = 1000;
                                                             break; //esce dal for
-                                                        }
-                                                        else
-                                                        {
+                                                        } else {
                                                             cambi.add(nome_cambio.get(l)); //ok
-                                                            l=1000;
+                                                            l = 1000;
                                                         }
 
 
@@ -179,7 +223,8 @@ public class PercorsiDAO {
 
                                             lista_appoggio.clear();
                                             nome_cambio.clear();
-                                }
+                                        }
+                                    }
 
                                 }
                                 in_mezzo.clear();
@@ -187,6 +232,7 @@ public class PercorsiDAO {
                                 check = false;
                                 linea_temp = linea;
                                 quanto_ci_passo = 0;
+                                this.Sequenze_di_cambiamento.add(successivo);
 
                             }
                         }
@@ -234,7 +280,35 @@ public class PercorsiDAO {
 
                                     } else {
                                         no_pass = false;
+
+                                    if(stopping==true) {
+                                        for (int j = 0; j < cambi_iniziali_linee.size(); j++) {
+                                            String[] parole = cambi_iniziali_linee.get(j).split("-");
+                                            for (String parola : parole) {
+                                                if (parola.equals(success)) {
+                                                    contatore++;
+                                                    nome_stazione_cambio = cambi_iniziali.get(j);
+                                                }
+                                            }
+                                        }
+                                        if (contatore == cambi_iniziali_linee.size()) {
+                                            System.out.println("Nessun cambio");
+                                            nome_stazione_cambio = "";
+                                        } else {
+                                            this.Sequenze_nodi_cruciali.add(nome_stazione_cambio);
+                                        }
+                                        contatore=0;
+                                        cambi_iniziali.clear();
+                                        cambi_iniziali_linee.clear();
+                                    }
                                         linea_temp = linea;
+
+
+
+
+
+
+
                                     }
                                 }
 
