@@ -459,7 +459,18 @@
                         "Mansion House", "North Greenwich", "Ravensbourne"],
             "Berlin": ["Alexanderplatz", "Hauptbahnhof", "Potsdamer Platz", "Zoologischer Garten"],
             "Stockholm": ["T-Centralen", "Gamla Stan", "Slussen", "Fridhemsplan"],
-            "Athens": ["Syntagma", "Acropolis", "Monastiraki", "Omonia"],
+            "Athens": ["Airport", "Koropi", "Paiania-Kantza", "Pallini", "Doukissis Plakentias", "Halandri",
+                        "Aghia Paraskevi", "Nomismatokopio", "Holargos", "Ethniki Amyna", "Katehaki", "Panormou",
+                        "Ampelokipi", "Megaro Moussikis", "Evangelismos", "Syntagma", "Panipistimo","Omonia",
+                        "Victoria", "Attiki", "Aghios Nikolaos", "Kato Patissia", "Aghios Eleftherios", "Ano Patissia",
+                        "Perissos", "Pefkakia", "Nea Ionia", "Iraklio", "Irini", "Neratziotissa", "Maroussi", "KAT",
+                        "Kifissia", "Akropoli", "Syngrou Fix", "Aghios Ioannis", "Dafni", "Aghios Dimitrios", "Illioupoli",
+                        "Alimos", "Argyroupoli", "Elliniko", "Monastiraki", "Thissio", "Petralona", "Tavros", "Kallithea",
+                        "Moschato", "Faliro", "Piraeus", "Dimotiko Theatro", "Maniatika", "Nikaia", "Korydallos",
+                        "Aghia Varvara", "Aghia Marina", "Egaleo", "Eleonas", "Kerameikos", "Metaxourghio",
+                        "Larissa Station", "Sepolia", "Aghios Antonios", "Peristeri", "Anthoupoli", "Neos Kosmos"],
+
+
             "Budapest": ["Deák Ferenc tér", "Kálvin tér", "Astoria", "Keleti pályaudvar"]
         };
 

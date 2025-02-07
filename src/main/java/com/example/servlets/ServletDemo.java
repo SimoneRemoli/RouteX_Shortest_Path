@@ -124,6 +124,10 @@ public class ServletDemo extends HttpServlet {
         {
             metropoli = new London();
         }
+        if(city.equals("Athens"))
+        {
+            metropoli = new Athens();
+        }
         assert metropoli != null;
         try {
             metropoli.Dijkstra(code_start_station,code_finish_station,city);
