@@ -42,9 +42,7 @@ To run RouteX locally, follow these steps:
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/RouteX.git
-cd RouteX
-
+git clone https://github.com/SimoneRemoli/RouteX.git
 # Install dependencies
 npm install # If the project uses Node.js
 or
