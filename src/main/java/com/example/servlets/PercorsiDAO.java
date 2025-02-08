@@ -59,7 +59,7 @@ public class PercorsiDAO {
         String fermate = null;
         String linea = null, linea_temp = "", temporanea="", da_raggiungere="",temp="",successivo="",success="";
         boolean check = false, no_pass=false,controllo=false,ci_son_passato=false,stopping=false,ancora=false,uno=false;
-        int count_bin = 0,quanto_ci_passo=0, con=0,contatore=0,count=0;
+        int count_bin = 0,quanto_ci_passo=0, con=0,contatore=0,count=0,conta=0;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Caricamento del driver
@@ -131,6 +131,55 @@ public class PercorsiDAO {
                                 in_mezzo_nomi.add(fermate);
                                 check = true;
                                 ci_son_passato = true;
+
+//nuovo
+                                if(i==Percorsi_Codifica.size()-1)
+                                {
+                                    for(int k=0;k<in_mezzo.size();k++)
+                                    {
+                                        String[] appoggio = in_mezzo.get(k).split("-");
+                                        for (String parola : appoggio)
+                                        {
+                                            if(!parola.equals(ev))
+                                            {
+                                                conta = conta + 1;
+                                                if(conta == appoggio.length)
+                                                {
+                                                    cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
+                                                    this.Sequenze_nodi_cruciali.add(in_mezzo_nomi.get(k-1));
+                                                    this.Sequenze_di_cambiamento.add(ev);
+                                                    for(int index=0;index<in_mezzo.size()-1;index++)
+                                                    {
+                                                        String[] parolina = in_mezzo.get(index).split("-");
+                                                        for(String p:parolina)
+                                                        {
+                                                            if(!p.equals(ev))
+                                                            {
+                                                                String par = p;
+                                                                String[] parolina2 = in_mezzo.get(index+1).split("-");
+                                                                for(String g:parolina2)
+                                                                {
+                                                                    if(par.equals(g))
+                                                                    {
+                                                                        this.Sequenze_di_cambiamento.add(par);
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                conta = 0;
+                                            }
+                                        }
+
+
+                                    }
+                                }
+
+
                             }
                             else {
                                 cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
