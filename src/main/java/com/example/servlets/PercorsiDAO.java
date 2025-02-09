@@ -23,6 +23,21 @@ public class PercorsiDAO {
     private ArrayList<String> in_mezzo = new ArrayList<String>();
     private ArrayList<String> in_mezzo_nomi = new ArrayList<String>();
 
+    private void remove_duplicate(ArrayList<String> Sequenze_di_cambiamento_full,int indice)
+    {
+        for(int i=indice;i<Sequenze_di_cambiamento_full.size();i++)
+        {
+            if(i==Sequenze_di_cambiamento_full.size()-1)
+                return;
+            if(Sequenze_di_cambiamento_full.get(i).equals(Sequenze_di_cambiamento_full.get(i+1)))
+            {
+                Sequenze_di_cambiamento_full.remove(i);
+                remove_duplicate(Sequenze_di_cambiamento_full,i);
+
+            }
+        }
+
+    }
 
 
     public PercorsiDAO(ArrayList<Integer> a, String city) throws Exception {
@@ -57,9 +72,9 @@ public class PercorsiDAO {
         Statement stmt = null;
         ResultSet rs = null;
         String fermate = null;
-        String linea = null, linea_temp = "", temporanea="", da_raggiungere="",temp="",successivo="",success="";
-        boolean check = false, no_pass=false,controllo=false,ci_son_passato=false,stopping=false,ancora=false,uno=false;
-        int count_bin = 0,quanto_ci_passo=0, con=0,contatore=0,count=0,conta=0;
+        String linea = null, linea_temp = "", temporanea="", da_raggiungere="",temp="",successivo="",success="", da_non_ripetere="";
+        boolean check = false, no_pass=false,controllo=false,ci_son_passato=false,stopping=false,ancora=false,uno=false,validator=false;
+        int count_bin = 0,quanto_ci_passo=0, con=0,contatore=0,count=0,conta=0,checkino=0;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Caricamento del driver
@@ -185,6 +200,7 @@ public class PercorsiDAO {
                                 cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
                                 this.Sequenze_di_cambiamento.add(linea_temp);
                                 successivo = linea;
+                                da_non_ripetere = linea;
                                 if(quanto_ci_passo == 0)
                                     this.Sequenze_nodi_cruciali.add(nome_stazione_cambio);
                                 else
@@ -227,6 +243,7 @@ public class PercorsiDAO {
                                         this.Sequenze_nodi_cruciali.add(in_mezzo_nomi.get(in_mezzo_nomi.size()-1));
                                     }
                                     else {
+                                        validator = true;
 
                                         while (!(da_raggiungere.equals(ev))) {
                                             for (int j = 0; j < in_mezzo.size(); j++) {
@@ -242,27 +259,31 @@ public class PercorsiDAO {
                                             //puo essere che lista appoggio abbia più di un elemento
                                             //ora strtok sugli elementi iesimi
                                             for (int l = 0; l < lista_appoggio.size(); l++) {
+                                                checkino = 0;
 
                                                 String[] parole = lista_appoggio.get(l).split("-");
                                                 for (String parola : parole) {
                                                     //System.out.println(parola);
-                                                    if (!(parola.equals(linea))) //se parola != linea
+                                                    if (!(parola.equals(da_non_ripetere))) //se parola != linea
                                                     {
                                                         da_raggiungere = parola;
                                                         if (!(da_raggiungere.equals(ev))) {
                                                             linea = da_raggiungere;
                                                             this.Sequenze_di_cambiamento.add(linea);
-                                                            cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
-                                                            cambi.add(nome_cambio.get(l));
-                                                            l = 1000;
-                                                            break; //esce dal for
+                                                            if(checkino == 0) {
+                                                                cambi_linee_metropolitane = cambi_linee_metropolitane + 1;
+                                                                cambi.add(nome_cambio.get(l));
+                                                            }
+                                                            checkino++;
+                                                           // l = 1000;
+                                                            //break; //esce dal for
                                                         } else {
                                                             cambi.add(nome_cambio.get(l)); //ok
                                                             l = 1000;
                                                         }
 
-
                                                         //linea = da_raggiungere;
+
 
                                                     }
 
@@ -279,7 +300,7 @@ public class PercorsiDAO {
                                 in_mezzo.clear();
                                 in_mezzo_nomi.clear();
                                 check = false;
-                                linea_temp = linea;
+                                linea_temp = da_non_ripetere;
                                 quanto_ci_passo = 0;
                                 this.Sequenze_di_cambiamento.add(successivo);
 
@@ -381,6 +402,7 @@ public class PercorsiDAO {
             stmt.close();
             conn.close();
 
+            remove_duplicate(cambi, 0);
 
 
             for(int i=cambi.size()-1;i>=0;i--)
@@ -389,6 +411,8 @@ public class PercorsiDAO {
                 this.Sequenze_nodi_cruciali.add(cambi.get(i));
 
             }
+            if(validator)
+                this.cambi_linee_metropolitane = this.cambi_linee_metropolitane-1;
 
           //  String query = "select id from " + citta + " where nome=?";
             //System.out.println("Query =  " + query);
