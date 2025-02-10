@@ -194,11 +194,8 @@
                 <select name="city" id="citySelect" onchange="updateStationsAndMap()">
                     <option value="" disabled selected>Select a city</option>
                     <option value="Rome">Rome</option>
-                    <option value="Paris">Paris</option>
                     <option value="Milan">Milan</option>
                     <option value="Naples">Naples</option>
-                    <option value="London">London</option>
-                    <option value="Berlin">Berlin</option>
                     <option value="Stockholm">Stockholm</option>
                     <option value="Athens">Athens</option>
                     <option value="Budapest">Budapest</option>
@@ -458,7 +455,21 @@
                         "Kentish Town West", "Camden Road", "Tooting", "Stepney Green", "Rayners Lane",
                         "Mansion House", "North Greenwich", "Ravensbourne"],
             "Berlin": ["Alexanderplatz", "Hauptbahnhof", "Potsdamer Platz", "Zoologischer Garten"],
-            "Stockholm": ["T-Centralen", "Gamla Stan", "Slussen", "Fridhemsplan"],
+            "Stockholm": ["Morby Centrum", "Danderyds Sjukhus", "Bergshamra", "Universitetet", "Tekniska Hogskolan",
+                        "Stadion", "Ostermalmstorg", "Ropsten", "Gardet", "Karlaplan", "T-Centralen", "Gamla Stan",
+                        "Kungstradgarden", "Slussen", "Medborgarplatsen", "Skanstull", "Gullmarsplan", "Skarmarbrink",
+                        "Globen", "Blasut", "Hammarbyhojden", "Bjorkhagen", "Karrtorp", "Bagarmossen", "Skarpnack",
+                        "Sandsborg", "Skogskyrko Garden", "Tallkgrogen", "Gubbangen", "Hokarangen", "Farsta",
+                        "Farsta Strand", "Enskede Gard", "Sockenplan", "Svedmyra", "Stureby", "Bandhagen", "Hogdalen",
+                        "Ragsved", "Hagsatra", "Mariatorget", "Zinkensdamm", "Hornstull", "Liljeholmen", "Aspudden", "Midsommar Kransen",
+                        "Telefonplan", "Hagerstensasen", "Vastertorp", "Fruangen", "Ornsberg", "Axels Berg", "Malar Hojden",
+                        "Bredang", "Satra", "Skarholmen", "Varberg", "Varby Gard", "Masmo", "Fittja", "Alby", "Hallunda",
+                        "Norsborg", "Hotorget", "Radmansgatan", "Odenplan", "Sankt Eriksplan", "Fridhemsplan", "Thorildsplan",
+                        "Rad Huset", "Kristine Berg", "Alvik", "Storamossen", "Abrahamsberg", "Brommaplan", "Akeshov",
+                        "Angbyplan", "Islandstorget", "Blackeberg", "Racksta", "Vallingby", "Johannelund", "Hasselby Gard",
+                        "Hasselby Strand", "Stadshagen", "Vastra Skogen", "Solna Centrum", "Huvudsta", "Solna Strand",
+                        "Sundbybergs Centrum", "Duvbo", "Rissne", "Rinkeby", "Tensta", "Hjulsta", "Nackrosen", "Hallonbergen",
+                        "Kymlinge", "Kista", "Husby", "Akalla" ],
             "Athens": ["Airport", "Koropi", "Paiania-Kantza", "Pallini", "Doukissis Plakentias", "Halandri",
                         "Aghia Paraskevi", "Nomismatokopio", "Holargos", "Ethniki Amyna", "Katehaki", "Panormou",
                         "Ampelokipi", "Megaro Moussikis", "Evangelismos", "Syntagma", "Panipistimo","Omonia",

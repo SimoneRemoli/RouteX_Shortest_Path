@@ -5,6 +5,6 @@ public class London extends City {
     public London()
     {
         this.matriceAdiacenza = new int[513][513];
-        caricaMatriceDaFile("/Users/simoneremoli/IdeaProjects/RouteX_Ispw/London.csv");
+        caricaMatriceDaFile("/Users/simoneremoli/IdeaProjects/RouteX_Ispw/Adjacency_Matrix/London.csv");
     }
 }

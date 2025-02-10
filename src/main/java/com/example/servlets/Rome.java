@@ -11,6 +11,6 @@ public class Rome extends City
     public Rome()
     {
         this.matriceAdiacenza = new int[76][76]; //roma ha 76 stazioni
-        caricaMatriceDaFile("/Users/simoneremoli/IdeaProjects/RouteX_Ispw/Rome.csv");
+        caricaMatriceDaFile("/Users/simoneremoli/IdeaProjects/RouteX_Ispw/Adjacency_Matrix/Rome.csv");
     }
 }

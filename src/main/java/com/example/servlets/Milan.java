@@ -10,6 +10,6 @@ public class Milan extends City
     public Milan()
     {
         this.matriceAdiacenza = new int[124][124]; //milano ha 124 stazioni
-        caricaMatriceDaFile("/Users/simoneremoli/IdeaProjects/RouteX_Ispw/Milan.csv");
+        caricaMatriceDaFile("/Users/simoneremoli/IdeaProjects/RouteX_Ispw/Adjacency_Matrix/Milan.csv");
     }
 }
