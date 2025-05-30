@@ -66,7 +66,7 @@ public class PercorsiDAO {
     }
     private void connection(ArrayList<Integer> Percorsi_Codifica,String city) throws Exception
     {
-        String url = "jdbc:mysql://localhost:3306/RouteX"; // Host e nome del database
+        String url = "jdbc:mysql://localhost:3306/RouteX?useSSL=false&allowPublicKeyRetrieval=true"; // Host e nome del database
         String username = "root"; // Username del database
         String password = "ste952r456!"; // Password del database
         Statement stmt = null;

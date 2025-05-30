@@ -18,49 +18,58 @@ public class StationDAO {
     {
         return Stazione_di_Arrivo;
     }
-    private void connection(Object... params) throws Exception {
+    private void connection(Object... params){
 
         String startstation = (String) params[0];
         String endstation = (String) params[1];
         String citta = (String) params[2];
 
-        String url = "jdbc:mysql://localhost:3306/RouteX"; // Host e nome del database
-        String username = "root"; // Username del database
-        String password = "ste952r456!"; // Password del database
 
-        try {
-            System.out.println("La città che entra è = " + citta);
-            Class.forName("com.mysql.cj.jdbc.Driver"); // Caricamento del driver
-            Connection conn = DriverManager.getConnection(url, username, password);
-            System.out.println("Connessione al database riuscita!");
-            /*Eseguo una query parametrizzata*/
-            String query = "select id from " + citta + " where nome=?";
-            //System.out.println("Query =  " + query);
-            PreparedStatement pstmt = conn.prepareStatement(query);
 
-            // Primo parametro: startstation
-            pstmt.setString(1, startstation);
-            ResultSet rs1 = pstmt.executeQuery();
-            if (rs1.next()) {
-                this.Stazione_di_Partenza = rs1.getInt("id");
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conn = ConnectionFactory.gettConnection();
+            CallableStatement cs = conn.prepareCall("{call RestituisciStazioni(?,?,?)}");
+            cs.setString(1,startstation);
+            cs.setString(2,endstation);
+            cs.setString(3,citta);
+            boolean HasMoreResultSet = cs.execute();
+            int numReslt = 0;
+
+            while(HasMoreResultSet)
+            {
+                ResultSet rs = cs.getResultSet();
+                numReslt++;
+
+                if(rs!=null)
+                {
+                    if(numReslt==1)
+                    {
+                        while(rs.next())
+                        {
+                            this.Stazione_di_Partenza = rs.getInt("id");
+                        }
+                    }
+                    if(numReslt==2)
+                    {
+                        while(rs.next())
+                        {
+                            this.Stazione_di_Arrivo = rs.getInt("id");
+                        }
+
+                    }
+                }
+                HasMoreResultSet = cs.getMoreResults();
+
             }
-            rs1.close();
 
-            // Secondo parametro: endstation
-            pstmt.setString(1, endstation);
-            ResultSet rs2 = pstmt.executeQuery();
-            if (rs2.next()) {
-                this.Stazione_di_Arrivo = rs2.getInt("id");
-            }
-            rs2.close();
 
-            pstmt.close();
-            conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        }catch(Exception e)
+        {
+            throw new RuntimeException("Errore nella connessione");
         }
     }
-
 }
 
 
