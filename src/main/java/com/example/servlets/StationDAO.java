@@ -18,7 +18,12 @@ public class StationDAO {
     {
         return Stazione_di_Arrivo;
     }
-    private void connection(String startstation, String endstation, String citta) throws Exception {
+    private void connection(Object... params) throws Exception {
+
+        String startstation = (String) params[0];
+        String endstation = (String) params[1];
+        String citta = (String) params[2];
+
         String url = "jdbc:mysql://localhost:3306/RouteX"; // Host e nome del database
         String username = "root"; // Username del database
         String password = "ste952r456!"; // Password del database
