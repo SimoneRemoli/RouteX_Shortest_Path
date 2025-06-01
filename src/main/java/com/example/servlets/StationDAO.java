@@ -51,7 +51,7 @@ public class StationDAO {
                         {
                             this.Stazione_di_Partenza = rs.getInt("id");
                         }
-                    }
+                    } //lalal
                     if(numReslt==2)
                     {
                         while(rs.next())
