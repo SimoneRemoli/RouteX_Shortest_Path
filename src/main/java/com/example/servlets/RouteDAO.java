@@ -17,7 +17,7 @@ public class RouteDAO {
 
 
 
-            String sp = "{ CALL routex.saveRoute(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }";
+            String sp = "{ CALL RouteX_Update.saveRoute(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) }";
             CallableStatement cs = conn.prepareCall(sp);
 
             cs.setString(1, route.getPartenza());
@@ -43,7 +43,7 @@ public class RouteDAO {
     public List<RouteInfo> getData(String cf) throws SQLException, DAOException {
         try (Connection conn = ConnectionFactory.gettConnection()){
 
-            String sp = "{ CALL routex.getPath(?) }";
+            String sp = "{ CALL RouteX_Update.getPath(?) }";
             CallableStatement cs = conn.prepareCall(sp);
 
             cs.setString(1, cf);

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,18 +89,19 @@ public class RouteInfo {
     public boolean checkStazione(String city, String startStation, String endStation) throws Exception {
         try (Connection conn = ConnectionFactory.gettConnection()){
             boolean start = false, end = false;
-            CallableStatement cs = conn.prepareCall("{ CALL routex.VerificaStazioni(?, ?, ?, ?, ?) }");
+            CallableStatement cs = conn.prepareCall("{ CALL RouteX_Update.VerificaStazioni(?, ?, ?) }");
 
             cs.setString(1, city);
             cs.setString(2, startStation);
             cs.setString(3, endStation);
-            cs.registerOutParameter(4, java.sql.Types.BOOLEAN);
-            cs.registerOutParameter(5, java.sql.Types.BOOLEAN);
 
-            cs.execute();
+            ResultSet rs =  cs.executeQuery();
 
-            start = cs.getBoolean(4);
-            end = cs.getBoolean(5);
+            while(rs.next())
+            {
+                start = rs.getBoolean("p_startExists");
+                end = rs.getBoolean("p_endExists");
+            }
 
             return start && end;
 

@@ -196,7 +196,7 @@ public class ServletDemo extends HttpServlet {
             if (Sequenze_di_cambiamento_full.isEmpty()) {
                 ArrayList<String> cambiNonPresenti = new ArrayList<>();
                 cambiNonPresenti.add("Non presenti");
-                request.setAttribute("listacambi", cambiNonPresenti);
+                request.setAttribute("listacambi", Sequenze_di_cambiamento_full);
             } else {
                 request.setAttribute("listacambi", Sequenze_di_cambiamento_full);
             }
