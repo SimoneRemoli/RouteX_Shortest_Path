@@ -1,16 +1,21 @@
 package com.example.servlets;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.IOException;
-import java.util.Arrays;
+import Model.RouteInfo;
 
-public class Rome extends City
-{
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-    public Rome()
-    {
-        this.matriceAdiacenza = new int[76][76]; //roma ha 76 stazioni
-        caricaMatriceDaFile("/Users/simoneremoli/IdeaProjects/RouteX_Ispw/Adjacency_Matrix/Rome.csv");
+public class Rome extends City {
+
+    public Rome() throws Exception {
+
+        this.matriceAdiacenza = new int[76][76]; // Roma ha 76 stazioni
+        caricaMatriceDaClasspath("/Adjacency_Matrix/Rome.csv");
+
     }
+
 }

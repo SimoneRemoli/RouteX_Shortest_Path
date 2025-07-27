@@ -66,9 +66,15 @@ public class PercorsiDAO {
     }
     private void connection(ArrayList<Integer> Percorsi_Codifica,String city) throws Exception
     {
-        String url = "jdbc:mysql://localhost:3306/RouteX?useSSL=false&allowPublicKeyRetrieval=true"; // Host e nome del database
-        String username = "root"; // Username del database
-        String password = "ste952r456!"; // Password del database
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = ConnectionFactory.gettConnection();
+        /*String url = properties.getProperty("CONNECTION_URL");
+        String username = properties.getProperty("TRAVELER_USER");
+        String password = properties.getProperty("TRAVELER_PASS");
+        Class.forName("com.mysql.cj.jdbc.Driver"); // Caricamento del driver
+        //Connection conn = DriverManager.getConnection(url, username, password);*/
+        System.out.println("Connessione al database riuscita!");
+
         Statement stmt = null;
         ResultSet rs = null;
         String fermate = null;
@@ -77,9 +83,6 @@ public class PercorsiDAO {
         int count_bin = 0,quanto_ci_passo=0, con=0,contatore=0,count=0,conta=0,checkino=0;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver"); // Caricamento del driver
-            Connection conn = DriverManager.getConnection(url, username, password);
-            System.out.println("Connessione al database riuscita!");
 
             for (int i = 0; i < Percorsi_Codifica.size(); i++)
             {

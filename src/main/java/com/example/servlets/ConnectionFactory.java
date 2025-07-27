@@ -36,6 +36,7 @@ public class ConnectionFactory {
             System.out.println("🔧 USER: " + user);
             System.out.println("🔧 PASS: " + pass);
 
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(connection_url, user, pass);
 
             if (connection != null) {
@@ -50,9 +51,29 @@ public class ConnectionFactory {
         }
     }
 
-    public static Connection gettConnection() throws SQLException {
+    public static Connection gettConnection() throws SQLException, IOException {
+        if (connection == null || connection.isClosed()) {
+            // apri la connessione
+            InputStream input = ConnectionFactory.class.getClassLoader().getResourceAsStream("db.properties");
+            if (input == null) {
+                System.out.println("❌ File db.properties NON TROVATO nel classpath");
+                throw new RuntimeException("File db.properties non trovato!");
+            }
+            Properties properties = new Properties();
+            properties.load(input);
+            String connection_url = properties.getProperty("CONNECTION_URL");
+            String user = properties.getProperty("TRAVELER_USER");
+            String pass = properties.getProperty("TRAVELER_PASS");
+            connection = DriverManager.getConnection(connection_url, user, pass);
+            if (connection != null) {
+                System.out.println("✅ Connessione creata con successo");
+            } else {
+                System.out.println("❌ Connessione è NULL");
+            }
+        }
         return connection;
     }
+
 
     public static void Cambio_Di_Ruolo(Ruolo ruolo) throws SQLException {
 
