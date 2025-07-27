@@ -1,8 +1,10 @@
 package com.example.servlets;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import Model.Permessi;
+
+import java.io.*;
+import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -50,6 +52,28 @@ public  abstract class City
             }
             System.out.println();
         }*/
+    }
+
+
+
+    public void caricaMatriceDaClasspath(String resourcePath) {
+        try (
+                InputStream inputStream = getClass().getResourceAsStream(resourcePath);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))
+        ) {
+            String line;
+            int row = 0;
+            while ((line = reader.readLine()) != null && row < 76) {
+                String[] values = line.split(",");
+                for (int col = 0; col < values.length && col < 76; col++) {
+                    matriceAdiacenza[row][col] = Integer.parseInt(values[col].trim());
+                }
+                row++;
+            }
+        } catch (IOException | NumberFormatException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Errore nel caricamento della matrice da classpath", e);
+        }
     }
     public void views_arrays(int[]a,int[]b, int[][]matrice)
     {
@@ -148,7 +172,7 @@ public  abstract class City
                     adj_temp = adiacenti_vector[i];
                     if(know[adj_temp]==-1) { // se il nodo adiacente non è conosciuto
 
-                       // System.out.println("nodo_partenza = "+nodo_partenza+" e adj_temp = "+ adj_temp);
+                        // System.out.println("nodo_partenza = "+nodo_partenza+" e adj_temp = "+ adj_temp);
 
                         if(cost[adj_temp] > cost[nodo_partenza] + matriceAdiacenza[nodo_partenza][adj_temp])
                         {
@@ -218,4 +242,4 @@ public  abstract class City
 
 }
 
-
+//Se ti da fastidio visualizzarla qui su whatsapp, sul branch main: https://github.com/SimoneRemoli/RouteX_Shortest_Path/blob/main/src/main/java/com/example/servlets/City.java

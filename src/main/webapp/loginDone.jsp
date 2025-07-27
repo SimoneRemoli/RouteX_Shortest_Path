@@ -104,13 +104,12 @@
     <!-- Contenitore dei pulsanti Home e Register -->
     <div class="button-container-right">
         <a href="index.jsp">Home</a>
-        <a href="register.jsp">Register</a>
+        <a href="logout">Logout</a>
     </div>
 
     <!-- Contenitore del messaggio di successo -->
     <div class="login-success-container">
         <h2>Welcome to RouteX!</h2>
-        <p>Thank you, <strong><%= request.getParameter("firstName") %> <%= request.getParameter("lastName") %></strong>, for logging in!</p>
         <form action="index.jsp" method="post">
             <button type="submit">Go to Home</button>
         </form>

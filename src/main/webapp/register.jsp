@@ -16,6 +16,21 @@
             position: relative;
         }
 
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        input[type="password"] {
+            width: 80%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #007bff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            font-family: 'Arial Rounded MT Bold', sans-serif; /* assicurati che sia uguale per tutti */
+            transition: all 0.3s ease;
+        }
+
         /* Container per il form */
         .register-container {
             background: rgba(255, 255, 255, 0.9);
@@ -134,19 +149,39 @@
     <!-- Contenitore del form di registrazione -->
     <div class="register-container">
         <h2>RouteX - Register</h2>
-        <form action="registerDone.jsp" method="post">
-            <input type="text" name="firstName" placeholder="First Name" required><br>
-            <input type="text" name="lastName" placeholder="Last Name" required><br>
-            <input type="email" name="email" placeholder="Email Address" required><br>
-            <input type="date" name="birthdate" placeholder="Birthdate" required><br>
-
-            <div class="checkbox-container">
-                <input type="checkbox" id="disabled" name="disabled">
-                <label for="disabled">I am disabled</label>
-            </div>
-
-            <button type="submit">Done</button>
-        </form>
+        <div class="row">
+            <form action="register" method="post">
+                <div class="tab-content bg-white" id="myTabContent">
+                    <div class="tab-pane shadow p-5 fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                        <div class="form-group my-4">
+                            <input type="text" name="firstName" placeholder="First Name" required><br>
+                        </div>
+                        <div class="form-group my-4">
+                            <input type="text" name="lastName" placeholder="Last Name" required><br>
+                        </div>
+                        <div class="form-group my-4">
+                            <input type="text" name="codicefiscale" placeholder="Codice Fiscale" required><br>
+                        </div>
+                        <div class="form-group my-4">
+                            <input type="password" name="password" placeholder="Password" required><br>
+                        </div>
+                        <div class="form-group my-4">
+                            <input type="email" name="email" placeholder="Email Address" required><br>
+                        </div>
+                        <div class="form-group my-4">
+                            <input type="date" name="birthdate" placeholder="Birthdate" required><br>
+                        </div>
+                        <div class="checkbox-container">
+                            <input type="checkbox" id="disabled" name="disabled">
+                            <label for="disabled">I am disabled</label>
+                        </div>
+                        <div class="mb-4">
+                            <button class="btn btn-primary btn-block rounded " type="submit" id="registrati" name="registrati">Registrati</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
 </body>

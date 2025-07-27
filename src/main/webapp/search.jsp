@@ -173,25 +173,105 @@
             left: 40px; /* Spazio dal margine sinistro */
         }
 
+        /* Tooltip container per il bottone disabilitato */
+        #submitBtn[disabled] {
+          position: relative;
+          cursor: not-allowed;
+        }
+
+        /* Tooltip personalizzato (inizialmente nascosto) */
+        #submitBtn[disabled]::after {
+          content: attr(data-tooltip);
+          position: absolute;
+          bottom: 130%; /* sopra il bottone */
+          left: 50%;
+          transform: translateX(-50%);
+          background-color: #333;
+          color: #fff;
+          padding: 6px 10px;
+          border-radius: 6px;
+          white-space: nowrap;
+          font-size: 14px;
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0s;
+          visibility: hidden;
+          z-index: 1000;
+        }
+
+        /* Tooltip visibile subito al passaggio mouse */
+        #submitBtn[disabled]:hover::after {
+          opacity: 1;
+          visibility: visible;
+          transition-delay: 0s; /* nessun delay */
+        }
+
+
+
     </style>
+    <script>
+        function validateForm() {
+            const city = document.getElementById('citySelect').value.trim();
+            const startStation = document.getElementById('startSearchBox').value.trim();
+            const endStation = document.getElementById('endSearchBox').value.trim();
+            const submitBtn = document.getElementById('submitBtn');
+
+            if (city !== "" && startStation !== "" && endStation !== "") {
+                submitBtn.disabled = false;
+                submitBtn.removeAttribute('title');
+            } else {
+                submitBtn.disabled = true;
+                submitBtn.setAttribute('title', 'Sono presenti dei campi vuoti');
+            }
+        }
+
+
+        // Inizializza lo stato del bottone appena la pagina è caricata
+        window.onload = function() {
+            validateForm();
+
+            <% if (request.getAttribute("stazioniNonValide") != null) { %>
+                alert("La stazione di partenza e/o arrivo non esiste per la città selezionata.");
+            <% } %>
+        }
+
+    </script>
 <body>
 
-    <!-- Contenitore del pulsante Home -->
-    <div class="button-container-left">
-        <a href="index.jsp">Home</a>
-    </div>
 
-    <!-- Contenitore dei pulsanti Login e Registrati -->
-    <div class="button-container-right">
-        <a href="register.jsp">Register</a>
-        <a href="login.jsp">Login</a>
-    </div>
+
+    <%
+        session = request.getSession(false);
+        String nome = null;
+        if (session != null) {
+            nome = (String) session.getAttribute("nome");
+        }
+
+        if (nome == null) {
+    %>
+        <div class="button-container-right">
+            <a href="index.jsp">Home</a>
+            <a href="register.jsp">Register</a>
+            <a href="login.jsp">Login</a>
+        </div>
+    <%
+        } else {
+    %>
+        <div class="button-container-right">
+            <a href="index.jsp">Home</a>
+            <a href="logout" class="logout-link">Logout</a>
+            <a href="areaRiservata" method="get">Area riservata</a>
+        </div>
+    <%
+        }
+    %>
 
     <div class="main-container">
         <div class="form-container">
             <h2>RouteX - Find Your Metro Route</h2>
             <form action="ServletDemo" method="post" name="select">
-                <select name="city" id="citySelect" onchange="updateStationsAndMap()">
+
+                <select name="city" id="citySelect" onchange="validateForm(); updateStationsAndMap()">
                     <option value="" disabled selected>Select a city</option>
                     <option value="Rome">Rome</option>
                     <option value="Milan">Milan</option>
@@ -201,19 +281,26 @@
                     <option value="Budapest">Budapest</option>
                 </select>
 
-
                 <br>
-                <input type="checkbox" name="disabledTraveler" value="yes"> I am a disabled traveler </input>
+                    <% if (session.getAttribute("cf") == null) { %>
+                        <div class="checkboxContainer">
+                            <input type="checkbox" name="disabledTraveler" value="yes" id="disabledTravelerCheckbox">
+                            <label for="disabledTravelerCheckbox">I am a disabled traveler</label>
+                        </div>
+                    <% } %>
                 <br><br><br>
 
-                <!-- servono due ID diversi per il fronted in JSP per gestire le stazioni, i name servono per la servlet backend -->
-                <input type="text" name="startStation" id="startSearchBox" class="searchBox" placeholder="Search start station..." onkeyup="searchStation('startSearchBox', 'startSearchResults')">
+                <input type="text" name="startStation" id="startSearchBox" class="searchBox" placeholder="Search start station..."
+                       onkeyup="validateForm(); searchStation('startSearchBox', 'startSearchResults')">
                 <div id="startSearchResults" class="searchResults"></div>
 
-                <input type="text" name="endStation" id="endSearchBox" class="searchBox" placeholder="Search end station..." onkeyup="searchStation('endSearchBox', 'endSearchResults')">
+                <input type="text" name="endStation" id="endSearchBox" class="searchBox" placeholder="Search end station..."
+                       onkeyup="validateForm(); searchStation('endSearchBox', 'endSearchResults')">
                 <div id="endSearchResults" class="searchResults"></div>
 
-                <button type="submit">Find Route</button>
+                <button type="submit" id="submitBtn" disabled data-tooltip="Sono presenti dei campi vuoti">
+                  Find Route
+                </button>
 
                 <br><br><br>
 

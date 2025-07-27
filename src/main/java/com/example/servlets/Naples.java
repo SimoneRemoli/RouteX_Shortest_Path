@@ -1,10 +1,15 @@
 package com.example.servlets;
 
+import Model.RouteInfo;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 public class Naples extends City
 {
-    public Naples()
-    {
+    public Naples() throws Exception {
+
         this.matriceAdiacenza = new int[39][39];
-        caricaMatriceDaFile("/Users/simoneremoli/IdeaProjects/RouteX_Ispw/Adjacency_Matrix/Naples.csv");
+        caricaMatriceDaClasspath("/Adjacency_Matrix/Naples.csv");
     }
 }

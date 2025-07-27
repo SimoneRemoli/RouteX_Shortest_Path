@@ -178,10 +178,29 @@
 
         <!-- Contenuto centrale -->
         <div class="right-content">
-            <!-- Pulsanti Login e Registrati -->
+            <!-- Pulsanti Login, Register o Logout -->
             <div class="button-container">
-                <a href="register.jsp">Register</a>
-                <a href="login.jsp">Login</a>
+                <%
+                    session = request.getSession(false);
+                    String nome = null;
+                    if (session != null) {
+                        nome = (String) session.getAttribute("nome");
+                    }
+
+                    if (nome == null) {
+                %>
+                        <a href="register.jsp">Register</a>
+                        <a href="login.jsp">Login</a>
+                <%
+                    } else {
+                %>
+                        <a href="index.jsp">Home</a>
+                        <a href="logout" class="logout-link">Logout</a>
+                        <a href="areaRiservata" method="get">Area riservata</a>
+                <%
+                    }
+                %>
+
             </div>
 
             <div class="welcome-container">
@@ -201,6 +220,22 @@
         <i class="fas fa-bus" style="font-size: 50px; color: white;"></i>
         <i class="fas fa-map-marker-alt" style="font-size: 50px; color: white;"></i>
     </div>
+
+    <script>
+    window.onbeforeunload = function () {
+        // Invia logout in modo sincrono prima che la pagina si chiuda o ricarichi
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "logout", false);  // false = sincrono (blockante)
+        try {
+            xhr.send(null);
+        } catch(e) {
+            // Ignora errori
+        }
+        // Non mostrare messaggi di conferma
+        return undefined;
+    };
+    </script>
+
 
 </body>
 </html>
